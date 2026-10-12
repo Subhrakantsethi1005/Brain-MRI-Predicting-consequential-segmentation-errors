@@ -1,0 +1,37 @@
+# Pre-specified analysis protocol.
+#
+# Edit and commit this file BEFORE any risk-model results exist on risk_test.
+# The git commit timestamp is your evidence that the endpoint was not tuned on
+# test results. scripts/04_evaluate_test.py refuses to run if this file has
+# uncommitted changes.
+#
+# STATUS: DRAFT. Justify each choice with citations in the paper before freezing.
+
+primary_endpoint:
+  # A segmentation is "consequential" when its whole-tumour volume error is large
+  # enough to plausibly change a volumetric assessment.
+  # Rationale to cite: RANO uses a >=25% increase in the bidimensional product to
+  # call progression (Wen et al., J Clin Oncol 2010); volumetric thresholds that
+  # have been proposed are larger. A 25% relative volume error is therefore a
+  # conservative candidate. Check against published inter-rater variability.
+  region: WT                 # WT | TC | ET
+  relative_error_min: 0.25   # |Vpred - Vref| / Vref
+  absolute_error_min_ml: 1.0 # also require >= 1 mL, so tiny tumours are not flagged for sub-mL errors
+
+secondary_endpoints:
+  # Reported in full whatever they show. Not used to pick the primary result.
+  - {name: WT_rel10, region: WT, relative_error_min: 0.10, absolute_error_min_ml: 0.0}
+  - {name: WT_rel40, region: WT, relative_error_min: 0.40, absolute_error_min_ml: 0.0}
+  - {name: TC_rel25, region: TC, relative_error_min: 0.25, absolute_error_min_ml: 1.0}
+  - {name: WT_dice80, region: WT, dice_below: 0.80}
+
+# Feature sets compared. The names refer to groups in src/brainrisk/risk.py.
+comparisons:
+  trivial_baseline: volume_only       # predicted volume alone
+  uncertainty_baseline: uncertainty   # standard uncertainty summaries
+  disagreement_baseline: disagreement # MC/TTA volume and Dice spread
+  candidate_1: boundary_morphology
+  candidate_2: combined
+models: [logistic, gbm]
+primary_model: logistic              # chosen in advance; GBM is secondary
+primary_metric: auroc

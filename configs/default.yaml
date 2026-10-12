@@ -1,0 +1,55 @@
+# Default configuration, sized for an RTX 4050 laptop GPU (6 GB VRAM).
+
+data:
+  # Root containing one folder per case, e.g. BraTS2021_00000/BraTS2021_00000_flair.nii.gz
+  root: data/BraTS2021_Training_Data
+  modalities: [t1, t1ce, t2, flair]   # file suffixes, in channel order
+  label_suffix: seg
+  # BraTS 2021: 1 = necrotic core, 2 = oedema, 4 = enhancing.
+  # BraTS 2023+ (incl. BraTS-Africa) uses 3 for enhancing: set enhancing_label: 3
+  enhancing_label: 4
+  # Ignored if empty. Lets you run the full pipeline on a few cases first.
+  max_cases: 0
+
+splits:
+  file: outputs/splits.json
+  seed: 2026
+  # Fractions of patients. The segmentation model never sees risk_dev or risk_test.
+  seg_train: 0.45
+  seg_val: 0.05
+  risk_dev: 0.30
+  risk_test: 0.20
+
+segmentation:
+  out_dir: outputs/seg_model
+  roi_size: [128, 128, 128]
+  batch_size: 1          # 6 GB VRAM: keep at 1 with AMP
+  num_workers: 4
+  max_epochs: 150
+  val_every: 5
+  lr: 1.0e-4
+  weight_decay: 1.0e-5
+  dropout: 0.1           # required for MC dropout at inference
+  channels: [16, 32, 64, 128, 256]
+  strides: [2, 2, 2, 2]
+  num_res_units: 2
+  amp: true
+  seed: 2026
+
+inference:
+  out_csv: outputs/case_features.csv
+  save_masks_dir: outputs/pred_masks   # empty string to disable
+  mc_samples: 10         # stochastic forward passes with dropout active
+  tta_flips: true        # add flipped passes to the sample set
+  sw_batch_size: 2
+  overlap: 0.5
+  threshold: 0.5
+  boundary_band_vox: 2
+
+risk:
+  out_dir: outputs/risk
+  cv_folds: 5
+  cv_repeats: 5
+  bootstrap: 2000
+  # Operating point is chosen on risk_dev only, then applied unchanged to risk_test.
+  target_sensitivity: 0.90
