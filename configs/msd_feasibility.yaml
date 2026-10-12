@@ -1,0 +1,54 @@
+# Feasibility preset: tiny, fast sanity check on the RTX 4050 before the full run.
+# 20 cases, 64^3 patch, 2 epochs, single-thread loading. Uses a SEPARATE splits
+# file + output dirs so it never touches the real msd.yaml run.
+# After this passes, switch back to configs/msd.yaml for the real training.
+
+data:
+  layout: msd
+  root: data/Task01_BrainTumour
+  modalities: [flair, t1w, t1gd, t2w]
+  label_suffix: seg
+  enhancing_label: 3
+  core_labels: [2]
+  max_cases: 20
+
+splits:
+  file: outputs/splits_feasibility.json
+  seed: 2026
+  seg_train: 0.45
+  seg_val: 0.05
+  risk_dev: 0.30
+  risk_test: 0.20
+
+segmentation:
+  out_dir: outputs/seg_model_feasibility
+  roi_size: [64, 64, 64]      # small, to guarantee it fits in 6 GB
+  batch_size: 1
+  num_workers: 0              # single-thread: avoids Windows DataLoader quirks on first run
+  max_epochs: 2
+  val_every: 1
+  lr: 2.0e-4
+  weight_decay: 1.0e-5
+  dropout: 0.1
+  channels: [16, 32, 64, 128]
+  strides: [2, 2, 2]
+  num_res_units: 2
+  amp: true
+  seed: 2026
+
+inference:
+  out_csv: outputs/case_features_feasibility.csv
+  save_masks_dir: ""
+  mc_samples: 3
+  tta_flips: true
+  sw_batch_size: 1
+  overlap: 0.5
+  threshold: 0.5
+  boundary_band_vox: 2
+
+risk:
+  out_dir: outputs/risk_feasibility
+  cv_folds: 3
+  cv_repeats: 1
+  bootstrap: 200
+  target_sensitivity: 0.90
