@@ -1,0 +1,52 @@
+# Fast preset for the RTX 4050 (6 GB): smaller patch, fewer epochs/cases, fewer MC passes.
+# Use to get working results quickly; switch to default.yaml for the full-quality run.
+
+data:
+  layout: brats
+  root: data/BraTS2021_Training_Data
+  modalities: [t1, t1ce, t2, flair]
+  label_suffix: seg
+  enhancing_label: 4
+  core_labels: [1]
+  max_cases: 300            # subset for speed
+
+splits:
+  file: outputs/splits_fast.json
+  seed: 2026
+  seg_train: 0.45
+  seg_val: 0.05
+  risk_dev: 0.30
+  risk_test: 0.20
+
+segmentation:
+  out_dir: outputs/seg_model_fast
+  roi_size: [96, 96, 96]    # ~2.4x less compute than 128^3
+  batch_size: 1
+  num_workers: 4
+  max_epochs: 80
+  val_every: 5
+  lr: 2.0e-4
+  weight_decay: 1.0e-5
+  dropout: 0.1
+  channels: [16, 32, 64, 128]
+  strides: [2, 2, 2]
+  num_res_units: 2
+  amp: true
+  seed: 2026
+
+inference:
+  out_csv: outputs/case_features_fast.csv
+  save_masks_dir: outputs/pred_masks_fast
+  mc_samples: 5             # halves inference time vs 10
+  tta_flips: true
+  sw_batch_size: 2
+  overlap: 0.5
+  threshold: 0.5
+  boundary_band_vox: 2
+
+risk:
+  out_dir: outputs/risk_fast
+  cv_folds: 5
+  cv_repeats: 5
+  bootstrap: 2000
+  target_sensitivity: 0.90

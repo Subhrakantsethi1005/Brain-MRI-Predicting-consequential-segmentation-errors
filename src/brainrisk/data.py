@@ -37,6 +37,30 @@ def discover_cases(root, modalities, label_suffix="seg", max_cases=0):
     return cases
 
 
+def discover_msd(root, max_cases=0):
+    """MSD Task01_BrainTumour layout: imagesTr/<id>.nii.gz (4D, 4 channels) + labelsTr/<id>.nii.gz."""
+    img_dir, lab_dir = Path(root) / "imagesTr", Path(root) / "labelsTr"
+    cases = []
+    for img in sorted(img_dir.glob("*.nii.gz")):
+        if img.name.startswith("._"):          # macOS resource forks shipped in the tar
+            continue
+        label = lab_dir / img.name
+        if not label.exists():
+            continue
+        cases.append({"id": img.name[:-len(".nii.gz")], "image": str(img), "label": str(label)})
+        if max_cases and len(cases) >= max_cases:
+            break
+    return cases
+
+
+def discover(data_cfg):
+    """Dispatch on data.layout ('brats' folders-of-modalities, or 'msd' 4D files)."""
+    if data_cfg.get("layout", "brats") == "msd":
+        return discover_msd(data_cfg["root"], data_cfg.get("max_cases", 0))
+    return discover_cases(data_cfg["root"], data_cfg["modalities"], data_cfg["label_suffix"],
+                          data_cfg.get("max_cases", 0))
+
+
 def patient_id(case_id):
     """BraTS 2023+ names cases BraTS-GLI-<patient>-<timepoint>; older releases use one case per patient."""
     m = re.match(r"^(BraTS-[A-Za-z]+-\d+)-\d+$", case_id)
@@ -75,11 +99,18 @@ def load_splits(path):
 
 
 class ConvertToRegionsd(mt.MapTransform):
-    """BraTS labels -> 3 binary channels [TC, WT, ET] (nested regions)."""
+    """Raw tumour labels -> 3 binary channels [TC, WT, ET] (nested regions).
 
-    def __init__(self, keys, enhancing_label=4):
+    enhancing_label: raw value for enhancing tumour (BraTS 2021: 4; BraTS 2023+ / MSD: 3).
+    core_labels: raw values that are tumour core but non-enhancing (necrotic/non-enhancing).
+        BraTS: [1] (label 2 is oedema). MSD Task01: [2] (label 1 is oedema).
+    Whole tumour is taken as all non-zero labels, so it is convention-independent.
+    """
+
+    def __init__(self, keys, enhancing_label=4, core_labels=(1,)):
         super().__init__(keys)
         self.et = enhancing_label
+        self.core_labels = tuple(core_labels)
 
     def __call__(self, data):
         d = dict(data)
@@ -87,8 +118,10 @@ class ConvertToRegionsd(mt.MapTransform):
             lab = d[key]
             lab = lab[0] if lab.ndim == 4 else lab
             et = lab == self.et
-            tc = (lab == 1) | et
-            wt = tc | (lab == 2)
+            tc = et
+            for c in self.core_labels:
+                tc = tc | (lab == c)
+            wt = lab > 0
             stacked = torch.stack([tc, wt, et]) if isinstance(lab, torch.Tensor) else np.stack([tc, wt, et])
             d[key] = stacked.float() if isinstance(stacked, torch.Tensor) else stacked.astype(np.float32)
         return d
@@ -104,18 +137,18 @@ def regions_to_labels(regions, enhancing_label=4):
     return out
 
 
-def _base(enhancing_label):
+def _base(enhancing_label, core_labels=(1,)):
     return [
         mt.LoadImaged(keys=["image", "label"], image_only=False),
         mt.EnsureChannelFirstd(keys=["image", "label"]),
         mt.EnsureTyped(keys=["image", "label"]),
-        ConvertToRegionsd(keys="label", enhancing_label=enhancing_label),
+        ConvertToRegionsd(keys="label", enhancing_label=enhancing_label, core_labels=core_labels),
         mt.Orientationd(keys=["image", "label"], axcodes="RAS"),
     ]
 
 
-def train_transforms(roi_size, enhancing_label=4):
-    return mt.Compose(_base(enhancing_label) + [
+def train_transforms(roi_size, enhancing_label=4, core_labels=(1,)):
+    return mt.Compose(_base(enhancing_label, core_labels) + [
         mt.CropForegroundd(keys=["image", "label"], source_key="image", allow_smaller=True),
         mt.NormalizeIntensityd(keys="image", nonzero=True, channel_wise=True),
         mt.SpatialPadd(keys=["image", "label"], spatial_size=roi_size),
@@ -130,7 +163,7 @@ def train_transforms(roi_size, enhancing_label=4):
     ])
 
 
-def eval_transforms(enhancing_label=4):
-    return mt.Compose(_base(enhancing_label) + [
+def eval_transforms(enhancing_label=4, core_labels=(1,)):
+    return mt.Compose(_base(enhancing_label, core_labels) + [
         mt.NormalizeIntensityd(keys="image", nonzero=True, channel_wise=True),
     ])

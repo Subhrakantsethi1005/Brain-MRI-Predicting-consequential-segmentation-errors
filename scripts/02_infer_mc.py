@@ -19,7 +19,7 @@ import torch  # noqa: E402
 from tqdm import tqdm  # noqa: E402
 
 from brainrisk.config import ensure_dir, load_config  # noqa: E402
-from brainrisk.data import discover_cases, eval_transforms, load_splits, regions_to_labels  # noqa: E402
+from brainrisk.data import discover, discover_cases, eval_transforms, load_splits, regions_to_labels  # noqa: E402
 from brainrisk.features import case_features  # noqa: E402
 from brainrisk.metrics import case_errors  # noqa: E402
 from brainrisk.model import build_unet, stochastic_predict  # noqa: E402
@@ -33,11 +33,13 @@ def main():
     ap.add_argument("--external-root", default=None, help="Evaluate every case under this folder instead")
     ap.add_argument("--external-name", default="external")
     ap.add_argument("--enhancing-label", type=int, default=None)
+    ap.add_argument("--core-labels", nargs="+", type=int, default=None, help="Non-enhancing core labels")
     ap.add_argument("--modalities", nargs="+", default=None, help="Override for external naming, e.g. t1n t1c t2w t2f")
     args = ap.parse_args()
     cfg = load_config(args.config)
     d, sc, ic = cfg["data"], cfg["segmentation"], cfg["inference"]
     et_label = args.enhancing_label or d["enhancing_label"]
+    core = args.core_labels or d.get("core_labels", [1])
     mods = args.modalities or d["modalities"]
 
     if args.external_root:
@@ -45,7 +47,7 @@ def main():
         todo = [(args.external_name, c) for c in cases]
         out_csv = Path(ic["out_csv"]).with_name(f"case_features_{args.external_name}.csv")
     else:
-        by_id = {c["id"]: c for c in discover_cases(d["root"], mods, d["label_suffix"])}
+        by_id = {c["id"]: c for c in discover(d)}
         splits = load_splits(cfg["splits"]["file"])
         for s in args.splits:
             if s.startswith("seg_train"):
@@ -62,7 +64,7 @@ def main():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model = build_unet(sc).to(device)
     model.load_state_dict(torch.load(args.checkpoint or Path(sc["out_dir"]) / "best.pt", map_location=device))
-    tf = eval_transforms(et_label)
+    tf = eval_transforms(et_label, core)
 
     for split, case in tqdm(todo):
         data = tf(case)

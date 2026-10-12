@@ -17,18 +17,28 @@ pip install -r requirements.txt
 pytest -q          # synthetic end-to-end smoke test, CPU, ~2 min
 ```
 
-Put the BraTS 2021 training data at `data/BraTS2021_Training_Data/<case>/<case>_{t1,t1ce,t2,flair,seg}.nii.gz`
-(or edit `configs/default.yaml`).
+Data options (set with `--config`):
+
+- **`configs/msd.yaml`** — MSD Task01_BrainTumour: downloads instantly, no registration;
+  use it to develop the pipeline now. Put it at `data/Task01_BrainTumour/{imagesTr,labelsTr}/`.
+- **`configs/default.yaml`** — BraTS 2021 (full quality). Lay out as
+  `data/BraTS2021_Training_Data/<case>/<case>_{t1,t1ce,t2,flair,seg}.nii.gz`.
+- **`configs/fast.yaml`** — BraTS, laptop-fast overrides (smaller patch, fewer epochs/cases/MC passes).
+
+The config carries the label convention (`enhancing_label`, `core_labels`) and the
+dataset `layout` (`brats` folders vs `msd` 4D files), so the same scripts run on either.
 
 ## Pipeline
 
 ```bash
-python scripts/00_make_splits.py                 # patient-level splits, once
-python scripts/01_train_segmentation.py          # add --resume after an interruption
-python scripts/02_infer_mc.py                    # features + reference errors -> outputs/case_features.csv
-python scripts/03_train_risk_model.py            # risk_dev only: CV comparison, freeze models/thresholds
-git commit configs/preregistration.yaml          # freeze the protocol
-python scripts/04_evaluate_test.py               # risk_test, once
+CFG=configs/msd.yaml                              # or default.yaml / fast.yaml
+python scripts/00_make_splits.py --config $CFG            # patient-level splits, once
+python scripts/01_train_segmentation.py --config $CFG     # --resume to continue; --warm-start X.pt to fine-tune
+python scripts/eval_segmentation.py --config $CFG         # Model 1 report: Dice + volume error on seg_val
+python scripts/02_infer_mc.py --config $CFG               # features + reference errors -> case_features*.csv
+python scripts/03_train_risk_model.py --config $CFG       # risk_dev only: CV comparison, freeze models/thresholds
+git commit configs/preregistration.yaml                   # freeze the protocol
+python scripts/04_evaluate_test.py --config $CFG          # risk_test, once
 ```
 
 External dataset (e.g. BraTS-Africa 2023):
@@ -46,9 +56,10 @@ Before the real run, try the whole chain on a few cases by setting `data.max_cas
 
 | Path | Contents |
 |---|---|
-| `configs/default.yaml` | paths and hyper-parameters (sized for a 6 GB GPU) |
+| `configs/{default,fast,msd}.yaml` | dataset + hyper-parameter presets (6 GB GPU) |
 | `configs/preregistration.yaml` | endpoint definitions and comparisons, committed before test evaluation |
-| `src/brainrisk/data.py` | case discovery, patient-level splits, transforms |
+| `docs/paper/` | introduction, abstract, and working reference list |
+| `src/brainrisk/data.py` | case discovery (BraTS + MSD), patient-level splits, transforms |
 | `src/brainrisk/model.py` | 3D U-Net, MC-dropout + flip inference |
 | `src/brainrisk/features.py` | reference-free case features |
 | `src/brainrisk/metrics.py` | Dice, HD95, volume errors, endpoint labels |

@@ -11,7 +11,7 @@ import yaml
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from brainrisk.data import make_splits, patient_id, regions_to_labels  # noqa: E402
+from brainrisk.data import ConvertToRegionsd, discover_msd, make_splits, patient_id, regions_to_labels  # noqa: E402
 from brainrisk.features import case_features  # noqa: E402
 from brainrisk.metrics import case_errors, dice, endpoint_label  # noqa: E402
 from brainrisk.risk import operating_point, threshold_for_sensitivity  # noqa: E402
@@ -70,6 +70,34 @@ def test_region_label_roundtrip():
     lab = np.array([0, 1, 2, 4])
     tc, wt, et = (lab == 1) | (lab == 4), lab > 0, lab == 4
     assert (regions_to_labels(np.stack([tc, wt, et])) == lab).all()
+
+
+def test_region_conversion_conventions():
+    # Same anatomy, two labelling schemes, must give identical TC/WT/ET.
+    brats = np.array([[[0, 1, 2, 4]]])          # necrotic=1, oedema=2, enhancing=4
+    msd = np.array([[[0, 2, 1, 3]]])            # oedema=1, non-enhancing=2, enhancing=3
+    rb = ConvertToRegionsd("label", enhancing_label=4, core_labels=(1,))({"label": brats})["label"]
+    rm = ConvertToRegionsd("label", enhancing_label=3, core_labels=(2,))({"label": msd})["label"]
+    # channels are [TC, WT, ET]
+    assert np.array_equal(rb, rm)
+    assert rb[2].tolist() == [[[0, 0, 0, 1]]]   # ET only the enhancing voxel
+    assert rb[0].tolist() == [[[0, 1, 0, 1]]]   # TC = core + enhancing
+    assert rb[1].tolist() == [[[0, 1, 1, 1]]]   # WT = all non-zero
+
+
+def test_discover_msd(tmp_path):
+    img, lab = tmp_path / "imagesTr", tmp_path / "labelsTr"
+    img.mkdir(); lab.mkdir()
+    for i in range(3):
+        name = f"BRATS_{i:03d}.nii.gz"
+        nib.save(nib.Nifti1Image(np.zeros((4, 4, 4, 4), np.float32), np.eye(4)), img / name)
+        nib.save(nib.Nifti1Image(np.zeros((4, 4, 4), np.uint8), np.eye(4)), lab / name)
+    (img / "._BRATS_000.nii.gz").write_bytes(b"junk")   # macOS resource fork, must be skipped
+    (img / "BRATS_999.nii.gz").touch()                  # no matching label, must be skipped
+    nib.save(nib.Nifti1Image(np.zeros((4, 4, 4, 4), np.float32), np.eye(4)), img / "BRATS_999.nii.gz")
+    cases = discover_msd(str(tmp_path))
+    assert [c["id"] for c in cases] == ["BRATS_000", "BRATS_001", "BRATS_002"]
+    assert all(isinstance(c["image"], str) for c in cases)
 
 
 def _write_synthetic_brats(root, n, shape=(40, 40, 40), seed=0):

@@ -1,13 +1,18 @@
 # Default configuration, sized for an RTX 4050 laptop GPU (6 GB VRAM).
 
 data:
+  layout: brats                       # brats = folder per case; msd = imagesTr/labelsTr 4D files
   # Root containing one folder per case, e.g. BraTS2021_00000/BraTS2021_00000_flair.nii.gz
   root: data/BraTS2021_Training_Data
-  modalities: [t1, t1ce, t2, flair]   # file suffixes, in channel order
+  modalities: [t1, t1ce, t2, flair]   # file suffixes, in channel order (brats layout only)
   label_suffix: seg
-  # BraTS 2021: 1 = necrotic core, 2 = oedema, 4 = enhancing.
-  # BraTS 2023+ (incl. BraTS-Africa) uses 3 for enhancing: set enhancing_label: 3
+  # Label convention: enhancing_label is the raw enhancing value; core_labels are the
+  # non-enhancing tumour-core values. Whole tumour = all non-zero labels.
+  #   BraTS 2021:  enhancing_label 4, core_labels [1]  (label 2 = oedema)
+  #   BraTS 2023+: enhancing_label 3, core_labels [1]
+  #   MSD Task01:  enhancing_label 3, core_labels [2]  (label 1 = oedema)
   enhancing_label: 4
+  core_labels: [1]
   # Ignored if empty. Lets you run the full pipeline on a few cases first.
   max_cases: 0
 

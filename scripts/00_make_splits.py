@@ -7,7 +7,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from brainrisk.config import load_config  # noqa: E402
-from brainrisk.data import discover_cases, make_splits, save_splits  # noqa: E402
+from brainrisk.data import discover, make_splits, save_splits  # noqa: E402
 
 
 def main():
@@ -21,7 +21,7 @@ def main():
     if Path(s["file"]).exists() and not args.overwrite:
         sys.exit(f"{s['file']} exists. Splits must stay fixed; pass --overwrite only before any training.")
 
-    cases = discover_cases(d["root"], d["modalities"], d["label_suffix"], d["max_cases"])
+    cases = discover(d)
     if not cases:
         sys.exit(f"No complete cases found under {d['root']}")
     splits = make_splits(cases, s, s["seed"])

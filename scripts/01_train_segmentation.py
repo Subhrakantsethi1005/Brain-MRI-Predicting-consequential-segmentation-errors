@@ -17,7 +17,7 @@ from monai.utils import set_determinism  # noqa: E402
 
 from brainrisk import REGIONS  # noqa: E402
 from brainrisk.config import ensure_dir, load_config  # noqa: E402
-from brainrisk.data import discover_cases, eval_transforms, load_splits, train_transforms  # noqa: E402
+from brainrisk.data import discover, eval_transforms, load_splits, train_transforms  # noqa: E402
 from brainrisk.model import build_unet  # noqa: E402
 
 
@@ -25,23 +25,27 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--config", default="configs/default.yaml")
     ap.add_argument("--resume", action="store_true")
+    ap.add_argument("--warm-start", default=None,
+                    help="Path to a .pt state_dict to initialise from (fine-tuning). "
+                         "Layers whose shape matches are loaded; the rest keep random init.")
     args = ap.parse_args()
     cfg = load_config(args.config)
     d, sc = cfg["data"], cfg["segmentation"]
     out = ensure_dir(sc["out_dir"])
     set_determinism(sc["seed"])
 
-    cases = {c["id"]: c for c in discover_cases(d["root"], d["modalities"], d["label_suffix"])}
+    cases = {c["id"]: c for c in discover(d)}
     splits = load_splits(cfg["splits"]["file"])
     train = [cases[i] for i in splits["seg_train"]]
     val = [cases[i] for i in splits["seg_val"]]
     print(f"train {len(train)}  val {len(val)}")
 
     roi = tuple(sc["roi_size"])
-    train_loader = DataLoader(Dataset(train, train_transforms(roi, d["enhancing_label"])),
+    core = d.get("core_labels", [1])
+    train_loader = DataLoader(Dataset(train, train_transforms(roi, d["enhancing_label"], core)),
                               batch_size=sc["batch_size"], shuffle=True, num_workers=sc["num_workers"],
                               pin_memory=True, persistent_workers=sc["num_workers"] > 0)
-    val_loader = DataLoader(Dataset(val, eval_transforms(d["enhancing_label"])), batch_size=1,
+    val_loader = DataLoader(Dataset(val, eval_transforms(d["enhancing_label"], core)), batch_size=1,
                             num_workers=sc["num_workers"])
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -54,6 +58,14 @@ def main():
 
     start, best, history = 0, -1.0, []
     ckpt_path = out / "last.pt"
+    if args.warm_start and not (args.resume and ckpt_path.exists()):
+        src = torch.load(args.warm_start, map_location=device)
+        src = src.get("model", src)  # accept a raw state_dict or a training checkpoint
+        tgt = model.state_dict()
+        loaded = {k: v for k, v in src.items() if k in tgt and v.shape == tgt[k].shape}
+        tgt.update(loaded)
+        model.load_state_dict(tgt)
+        print(f"warm-started: loaded {len(loaded)}/{len(tgt)} tensors from {args.warm_start}")
     if args.resume and ckpt_path.exists():
         ck = torch.load(ckpt_path, map_location=device)
         model.load_state_dict(ck["model"]); opt.load_state_dict(ck["opt"])

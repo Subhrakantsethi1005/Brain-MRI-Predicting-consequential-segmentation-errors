@@ -1,0 +1,55 @@
+# MSD Task01_BrainTumour preset — downloads instantly, for developing the pipeline
+# before BraTS 2021 access is granted. MSD packs 4 modalities into one 4D file
+# (layout: msd) and labels oedema=1, non-enhancing=2, enhancing=3.
+# NOTE: MSD overlaps with BraTS 2021 (same source scans) — use one or the other for
+# the main experiments, never both.
+
+data:
+  layout: msd
+  root: data/Task01_BrainTumour     # contains imagesTr/ and labelsTr/
+  modalities: [flair, t1w, t1gd, t2w]   # MSD channel order (informational; not used for msd layout)
+  label_suffix: seg
+  enhancing_label: 3
+  core_labels: [2]                  # label 1 is oedema (whole tumour only)
+  max_cases: 0
+
+splits:
+  file: outputs/splits_msd.json
+  seed: 2026
+  seg_train: 0.45
+  seg_val: 0.05
+  risk_dev: 0.30
+  risk_test: 0.20
+
+segmentation:
+  out_dir: outputs/seg_model_msd
+  roi_size: [96, 96, 96]
+  batch_size: 1
+  num_workers: 4
+  max_epochs: 80
+  val_every: 5
+  lr: 2.0e-4
+  weight_decay: 1.0e-5
+  dropout: 0.1
+  channels: [16, 32, 64, 128]
+  strides: [2, 2, 2]
+  num_res_units: 2
+  amp: true
+  seed: 2026
+
+inference:
+  out_csv: outputs/case_features_msd.csv
+  save_masks_dir: outputs/pred_masks_msd
+  mc_samples: 5
+  tta_flips: true
+  sw_batch_size: 2
+  overlap: 0.5
+  threshold: 0.5
+  boundary_band_vox: 2
+
+risk:
+  out_dir: outputs/risk_msd
+  cv_folds: 5
+  cv_repeats: 5
+  bootstrap: 2000
+  target_sensitivity: 0.90
