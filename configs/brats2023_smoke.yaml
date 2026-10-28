@@ -1,0 +1,54 @@
+# SMOKE TEST ONLY — not for real results. Confirms the pipeline runs end-to-end on
+# BraTS 2023 (data loading, training loop, MC inference, feature extraction) with a
+# tiny subset and 2 epochs. Writes to *_smoke output dirs so it never touches the
+# real run's outputs. For real results use configs/brats2023.yaml (max_cases: 0).
+
+data:
+  layout: brats
+  root: C:/Users/SUBHRAKANT SETHI/Brain-MRI-Predicting-consequential-segmentation-errors/data/brats2023_download/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData
+  modalities: [t1n, t1c, t2w, t2f]
+  label_suffix: seg
+  enhancing_label: 3
+  core_labels: [1]
+  max_cases: 20                       # SMOKE: only 20 cases
+
+splits:
+  file: outputs/splits_brats2023_smoke.json
+  seed: 2026
+  seg_train: 0.45
+  seg_val: 0.05
+  risk_dev: 0.30
+  risk_test: 0.20
+
+segmentation:
+  out_dir: outputs/seg_model_brats23_smoke
+  roi_size: [128, 128, 128]
+  batch_size: 1
+  num_workers: 4
+  max_epochs: 2                       # SMOKE: 2 epochs just to prove the loop runs
+  val_every: 1
+  lr: 1.0e-4
+  weight_decay: 1.0e-5
+  dropout: 0.1
+  channels: [16, 32, 64, 128, 256]
+  strides: [2, 2, 2, 2]
+  num_res_units: 2
+  amp: true
+  seed: 2026
+
+inference:
+  out_csv: outputs/case_features_brats2023_smoke.csv
+  save_masks_dir: outputs/pred_masks_brats23_smoke
+  mc_samples: 2                       # SMOKE: 2 MC samples
+  tta_flips: true
+  sw_batch_size: 2
+  overlap: 0.5
+  threshold: 0.5
+  boundary_band_vox: 2
+
+risk:
+  out_dir: outputs/risk_brats23_smoke
+  cv_folds: 5
+  cv_repeats: 5
+  bootstrap: 2000
+  target_sensitivity: 0.90

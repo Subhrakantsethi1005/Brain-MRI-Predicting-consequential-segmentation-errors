@@ -1,0 +1,79 @@
+{
+  "region": "WT",
+  "n_dev": 379,
+  "n_test": 245,
+  "dev": {
+    "consequence_flag": {
+      "auroc": 0.8842980705256154,
+      "auroc_lo": 0.8306999883105279,
+      "auroc_hi": 0.9288806523605332,
+      "auprc": 0.532705095665845,
+      "retained_frac@90sens": 0.5857519788918206,
+      "residual_error@90sens": 0.018018018018018018
+    },
+    "overlap_qc_baseline": {
+      "auroc": 0.9163672654690619,
+      "auroc_lo": 0.8598442157425036,
+      "auroc_hi": 0.9623515474231418,
+      "auprc": 0.6827838250118043,
+      "retained_frac@90sens": 0.7730870712401056,
+      "residual_error@90sens": 0.013651877133105802
+    },
+    "volume_only": {
+      "auroc": 0.7343313373253493,
+      "auroc_lo": 0.6442218201919695,
+      "auroc_hi": 0.8150350642010242,
+      "auprc": 0.36762673612205055,
+      "retained_frac@90sens": 0.2612137203166227,
+      "residual_error@90sens": 0.04040404040404041
+    },
+    "best_single_uncertainty": {
+      "auroc": 0.9174318030605455,
+      "auroc_lo": 0.8751200745645047,
+      "auroc_hi": 0.9522421981004071,
+      "auprc": 0.6632926789320713,
+      "retained_frac@90sens": 0.6728232189973615,
+      "residual_error@90sens": 0.01568627450980392
+    }
+  },
+  "test": {
+    "consequence_flag": {
+      "auroc": 0.7428515471993733,
+      "auroc_lo": 0.6199684290026295,
+      "auroc_hi": 0.8543910402233245,
+      "auprc": 0.24619537414154105,
+      "retained_frac@90sens": 0.2163265306122449,
+      "residual_error@90sens": 0.03773584905660377
+    },
+    "overlap_qc_baseline": {
+      "auroc": 0.7855464159811986,
+      "auroc_lo": 0.6813509869056544,
+      "auroc_hi": 0.8795277581556641,
+      "auprc": 0.26710326527545464,
+      "retained_frac@90sens": 0.2693877551020408,
+      "residual_error@90sens": 0.030303030303030304
+    },
+    "volume_only": {
+      "auroc": 0.7659616137877008,
+      "auroc_lo": 0.6662867827013331,
+      "auroc_hi": 0.8553831496660802,
+      "auprc": 0.3176113014167542,
+      "retained_frac@90sens": 0.4897959183673469,
+      "residual_error@90sens": 0.016666666666666666
+    },
+    "best_single_uncertainty": {
+      "auroc": 0.8378378378378379,
+      "auroc_lo": 0.7440347704582735,
+      "auroc_hi": 0.9159816686251468,
+      "auprc": 0.4617177651741424,
+      "retained_frac@90sens": 0.5591836734693878,
+      "residual_error@90sens": 0.014598540145985401
+    }
+  },
+  "A4_differentiation": {
+    "diff": -0.04269486878182527,
+    "lo": -0.12068564433999242,
+    "hi": 0.018972155984564577,
+    "p": 0.248
+  }
+}

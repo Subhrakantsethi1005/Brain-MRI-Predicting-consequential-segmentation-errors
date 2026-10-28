@@ -1,10 +1,13 @@
 # Introduction (draft)
 
-> Status: research-proposal draft for BIOAI-2026. Results-dependent statements
-> are written as aims ("we investigate / formulate / evaluate") because the
-> experiments are not yet complete. Citations `[n]` map to the list at the foot
-> of this file; all entries were verified against source (Oct 2026) — do a final
-> house-style/formatting pass before submission.
+> Status: draft for BIOAI-2026. Contributions are framed as the problem
+> formulation and comparison (not as a claim of beating baselines), which remains
+> correct given the feasibility results: see `results.md` — on the pre-registered
+> primary endpoint the engineered features do not outperform the baselines. The
+> aim-style wording ("we formulate / compare / evaluate") is therefore kept.
+> Citations `[n]` map to the list at the foot of this file; all entries were
+> verified against source (Oct 2026) — do a final house-style/formatting pass
+> before submission.
 
 Gliomas are among the most common and aggressive primary brain tumours, and
 magnetic resonance imaging (MRI) is the principal modality for their diagnosis,

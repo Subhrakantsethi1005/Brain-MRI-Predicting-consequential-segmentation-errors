@@ -1,0 +1,64 @@
+# BraTS 2023 Adult Glioma (BraTS-GLI) — full-quality training corpus (1,251 labelled cases).
+# The real run that the MSD feasibility stage stood in for. Same pipeline, 00->04.
+#
+# Layout expected (one folder per case, hyphen-separated BraTS 2023 naming):
+#   <root>/BraTS-GLI-00000-000/BraTS-GLI-00000-000-t1n.nii.gz
+#                              BraTS-GLI-00000-000-t1c.nii.gz
+#                              BraTS-GLI-00000-000-t2w.nii.gz
+#                              BraTS-GLI-00000-000-t2f.nii.gz
+#                              BraTS-GLI-00000-000-seg.nii.gz   (labels 1=NCR, 2=ED, 3=ET)
+#
+# `root` must be the directory whose IMMEDIATE children are the BraTS-GLI-* case folders.
+# If you downloaded with kagglehub, point root at that cache path, e.g.:
+#   root: C:/Users/SUBHRAKANT SETHI/.cache/kagglehub/datasets/ishita21gupta/brats-2023-adult-glioma/versions/1/<subfolder>
+# or move/symlink the case folders under data/BraTS2023_GLI and keep the line below.
+
+data:
+  layout: brats
+  root: C:/Users/SUBHRAKANT SETHI/Brain-MRI-Predicting-consequential-segmentation-errors/data/brats2023_download/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData
+  modalities: [t1n, t1c, t2w, t2f]    # BraTS 2023 file suffixes, in channel order
+  label_suffix: seg
+  enhancing_label: 3                  # BraTS 2023+: ET = 3 (was 4 in BraTS 2021)
+  core_labels: [1]                    # 1 = necrotic core; 2 = oedema (whole tumour = all non-zero)
+  max_cases: 0                        # set to e.g. 20 for a first smoke-test run
+
+splits:
+  file: outputs/splits_brats2023.json
+  seed: 2026
+  seg_train: 0.45
+  seg_val: 0.05
+  risk_dev: 0.30
+  risk_test: 0.20
+
+segmentation:
+  out_dir: outputs/seg_model_brats23
+  roi_size: [128, 128, 128]
+  batch_size: 1                       # 6 GB VRAM: keep at 1 with AMP
+  num_workers: 4
+  max_epochs: 150
+  val_every: 5
+  lr: 1.0e-4
+  weight_decay: 1.0e-5
+  dropout: 0.1                        # required for MC dropout at inference
+  channels: [16, 32, 64, 128, 256]
+  strides: [2, 2, 2, 2]
+  num_res_units: 2
+  amp: true
+  seed: 2026
+
+inference:
+  out_csv: outputs/case_features_brats2023.csv
+  save_masks_dir: outputs/pred_masks_brats23
+  mc_samples: 10
+  tta_flips: true
+  sw_batch_size: 2
+  overlap: 0.5
+  threshold: 0.5
+  boundary_band_vox: 2
+
+risk:
+  out_dir: outputs/risk_brats23
+  cv_folds: 5
+  cv_repeats: 5
+  bootstrap: 2000
+  target_sensitivity: 0.90
