@@ -2,7 +2,7 @@
 
 > **One-line summary:** A system that looks at an AI's brain-tumour outline and predicts — *without ever seeing the correct answer* — whether the outline got the tumour's **size** badly wrong, so risky cases can be sent to a doctor and safe ones trusted automatically.
 
-**Target venue:** BioAI-2026 (Theme 2 — Health). &nbsp;|&nbsp; **Status:** preliminary study complete.
+**Type:** University AI course project. &nbsp;|&nbsp; **Status:** study complete.
 **Team:** Subhrakant Sethi, Ayush Singh, Abhayaditya Sogi, Pratyaksh Singh — B.Tech Biotechnology, Thapar Institute of Engineering and Technology, Patiala.
 
 > ⚠️ This is a **research pipeline, not a clinical decision system.**

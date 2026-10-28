@@ -1,7 +1,6 @@
-# Abstract — BioAI-2026 submission
+# Abstract
 
-> ~285 words (limit 300) · 6 keywords (max 6) · Theme 2: Health, Pharmaceutical
-> & Forensic Sciences. Reports completed preliminary results honestly.
+> ~285 words · 6 keywords. Reports completed preliminary results honestly.
 > **ACTION NEEDED: replace the author line with your name(s) and affiliation.**
 
 **Predicting Consequential Volume Errors in Automated Brain-Tumour MRI Segmentation**

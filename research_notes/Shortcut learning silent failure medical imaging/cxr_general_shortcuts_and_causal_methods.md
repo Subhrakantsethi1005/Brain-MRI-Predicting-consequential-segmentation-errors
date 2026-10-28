@@ -2,7 +2,7 @@
 
 **Purpose:** Establish (JOB 1) exactly what "another shortcut paper" looks like so we know what is already TAKEN and cannot be claimed as novel, and (JOB 2) the methods for rigorously *proving causal reliance* on a shortcut, with emphasis on what is feasible on a ~6 GB laptop GPU without training large models.
 
-**Survey date:** 2026-10-23. Target venue: BIOAI-2026.
+**Survey date:** 2026-10-23.
 
 **Provenance note / honesty flag:** Landmark citations below were located via web search and carry stable, real identifiers (arXiv IDs, DOIs, venue pages) that I verified by title/author/venue match. A handful of *very recent* (2025-2026) hits surfaced by search carry arXiv-style IDs I could **not** independently confirm (flagged inline with ⚠). Treat the flagged ones as "exists in this space, verify the exact ID before citing." Nothing here should be cited in a paper without opening the source PDF.
 
@@ -47,7 +47,7 @@
 - "The model can read demographics / is unfair to subgroup Z." (Gichoya, Seyyed-Kalantari, Glocker own this.)
 - "Saliency shows the model looks at the wrong place." (DeGrave + Lapuschkin own this, and saliency alone is not proof — see JOB 2.)
 
-**Implication for a BIOAI-2026 paper:** Novelty must come from something *beyond* demonstrating a shortcut exists. Viable differentiators: (i) a **new causal-proof methodology** feasible on modest hardware; (ii) a shortcut in an **under-studied modality/task** (e.g., brain MRI segmentation-error / consequential-error prediction — note this is the user's actual project) rather than CXR classification; (iii) connecting shortcut reliance to a **downstream clinical-decision harm** that is quantified, not just AUC drop; (iv) a **detection/abstention mechanism** rather than yet another demonstration. CXR is the saturated baseline that sets the bar — the paper should position CXR findings as *known prior art* and claim contribution elsewhere.
+**Implication for this project:** Novelty must come from something *beyond* demonstrating a shortcut exists. Viable differentiators: (i) a **new causal-proof methodology** feasible on modest hardware; (ii) a shortcut in an **under-studied modality/task** (e.g., brain MRI segmentation-error / consequential-error prediction — note this is the user's actual project) rather than CXR classification; (iii) connecting shortcut reliance to a **downstream clinical-decision harm** that is quantified, not just AUC drop; (iv) a **detection/abstention mechanism** rather than yet another demonstration. CXR is the saturated baseline that sets the bar — the paper should position CXR findings as *known prior art* and claim contribution elsewhere.
 
 ---
 

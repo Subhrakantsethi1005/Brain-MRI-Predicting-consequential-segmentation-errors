@@ -1,6 +1,6 @@
 # Introduction (draft)
 
-> Status: draft for BIOAI-2026. Contributions are framed as the problem
+> Status: draft. Contributions are framed as the problem
 > formulation and comparison (not as a claim of beating baselines), which remains
 > correct given the feasibility results: see `results.md` — on the pre-registered
 > primary endpoint the engineered features do not outperform the baselines. The

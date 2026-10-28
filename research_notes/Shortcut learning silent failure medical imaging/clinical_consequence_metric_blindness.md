@@ -2,7 +2,7 @@
 
 **Purpose:** Scope the "SO WHAT" (shortcut → changed clinical decision / patient-relevant outcome)
 and "metrics don't catch it" (aggregate metrics stay high while the model is dangerously wrong)
-angles for a shortcut-learning / silent-failure paper. Target venue: BIOAI-2026.
+angles for a shortcut-learning / silent-failure paper.
 
 **Date:** 2026-10-23
 **Our data:** BraTS 2023 adult glioma (1251 cases, 4 modalities + seg labels), 6 GB laptop; plus a CXR project.

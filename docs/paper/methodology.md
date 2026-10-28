@@ -1,6 +1,6 @@
 # Methodology
 
-> Self-contained methodology for the BIOAI-2026 submission. Describes the
+> Self-contained methodology for the project. Describes the
 > implemented pipeline (what we did and how), the feasibility experiments run so
 > far, and the planned extensions (what we will do), including the learned
 > end-to-end error detector and the move to a larger training corpus. Completed

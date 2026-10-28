@@ -1,4 +1,4 @@
-# Paper — BIOAI-2026 submission
+# Paper
 
 Reference-free prediction of **consequential volume errors** in brain-tumour MRI
 segmentation, posed as a pre-registered triage benchmark.

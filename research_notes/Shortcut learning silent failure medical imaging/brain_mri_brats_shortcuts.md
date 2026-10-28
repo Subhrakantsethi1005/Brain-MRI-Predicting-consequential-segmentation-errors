@@ -3,7 +3,7 @@
 **Purpose:** Map what is ALREADY PUBLISHED on shortcut learning / spurious correlations /
 dataset artifacts / hidden confounders in brain-MRI deep-learning models (classification AND
 segmentation), with special focus on **BraTS** and **gliomas**, so we know what is TAKEN and where
-a genuinely under-explored shortcut/silent-failure mode might still exist for a BIOAI-2026 paper.
+a genuinely under-explored shortcut/silent-failure mode might still exist for this project.
 
 **Date compiled:** 2026-10-23. Survey by web search (arXiv, PubMed/PMC, Nature, IEEE, MICCAI, Springer).
 **Honesty caveat:** Absence of a paper in these searches is **NOT** proof of novelty. Several venues

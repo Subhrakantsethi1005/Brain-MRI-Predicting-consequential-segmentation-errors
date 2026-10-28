@@ -1,6 +1,6 @@
 # Reference-Free Prediction of *Clinically Consequential* Volume Errors in Glioma Segmentation: a Characterisation and Triage Study on BraTS 2023
 
-*Course project report — BIOAI / AI project. 2026-10-27. All results final: full inference complete (659 cases); headline evaluated once on the frozen held-out split (risk_test, n=245), with development-split results consistent.*
+*Course project report — AI project. 2026-10-27. All results final: full inference complete (659 cases); headline evaluated once on the frozen held-out split (risk_test, n=245), with development-split results consistent.*
 
 ---
 

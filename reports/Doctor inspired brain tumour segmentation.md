@@ -24,7 +24,7 @@ This report synthesises five researcher notes (`research_notes/Doctor inspired b
 
 > A **fast, label-free, model-free glance-then-zoom** segmenter whose *glance* is driven by **two simple, interpretable, training-free saliency maps — hemispheric-symmetry-break AND cross-modality variance — computed directly from the normalised input**, feeding a standard deep refiner, **with inference latency/FLOPs reported as a headline**, and **evaluated not only on Dice but on the project's consequential volume-error / RANO triage endpoint.**
 
-This is **novel as an assembly and as a framing, not as new theory.** That is a legitimate, defensible contribution for a venue like BIOAI-2026 — *provided* we position explicitly against DCSNN, ReCoSeg++, EnTrust, PGR-Net and the nnU-Net cascade, and we do **not** claim to have invented symmetry priors, disagreement signals, or cascades. Honesty here is not optional: a reviewer who knows DCSNN will reject an over-claim instantly.
+This is **novel as an assembly and as a framing, not as new theory.** That is a legitimate, defensible contribution for an original course project — *provided* we position explicitly against DCSNN, ReCoSeg++, EnTrust, PGR-Net and the nnU-Net cascade, and we do **not** claim to have invented symmetry priors, disagreement signals, or cascades. Honesty here is not optional: a reviewer who knows DCSNN will reject an over-claim instantly.
 
 **Confidence:** medium-high on "individual pieces are taken" (direct citations); medium on "the exact combination is unclaimed" (this is inferred from absence across ~12 targeted searches + a fusion survey, not from a paper that says "nobody has done this").
 
