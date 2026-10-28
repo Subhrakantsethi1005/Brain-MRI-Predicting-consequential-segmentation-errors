@@ -1,0 +1,392 @@
+% ============================================================================
+%  Predicting Consequential Volume Errors in Automated Brain-Tumour MRI
+%  Segmentation  --  BioAI-2026 (preliminary study, MSD Task01_BrainTumour)
+%
+%  HOW TO COMPILE (easiest): upload this file to https://www.overleaf.com
+%  (New Project -> Upload Project) and click "Recompile". No install needed.
+%
+%  BEFORE SUBMITTING:
+%   1. Fill in the author block (name, supervisor, department, email).
+%   2. Add the figure file  risk_coverage.png  next to this .tex
+%      (it is your outputs/risk_msd/risk_test_risk_coverage.png).
+%   3. Do a final check of references [12]-[14] (2026 preprints).
+% ============================================================================
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{times}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{siunitx}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue}
+\usepackage{caption}
+\captionsetup{font=small,labelfont=bf}
+
+\title{\textbf{Predicting Consequential Volume Errors in\\ Automated Brain-Tumour MRI Segmentation}}
+
+\author{
+  Subhrakant Sethi\textsuperscript{1} \and Ayush Singh\textsuperscript{1} \and
+  Abhayaditya Sogi\textsuperscript{1} \and Pratyaksh Singh\textsuperscript{1}\\[2pt]
+  \small \textsuperscript{1}Department of Biotechnology, Thapar Institute of
+  Engineering and Technology, Patiala, India\\
+  \small Corresponding authors: \texttt{ssethi\_btech24@thapar.edu},
+  \texttt{asingh3\_btech24@thapar.edu}
+}
+\date{}
+
+\begin{document}
+\maketitle
+
+% ---------------------------------------------------------------- Abstract
+\begin{abstract}
+\noindent
+Tumour volume measured from brain MRI guides the assessment of glioma progression
+and treatment response, yet automated segmentation occasionally mis-estimates
+volume enough to mislead clinical interpretation, without signalling that it has
+done so. Safe large-scale use therefore requires knowing, for each scan, whether an
+output can be trusted. Existing reliability methods largely relate uncertainty to
+overlap metrics such as the Dice coefficient rather than to volume error, seldom
+define error against a pre-specified clinical threshold, and are rarely framed as an
+operational triage task. We study segmentation reliability as the \emph{case-level
+prediction of consequential volume error}. Without introducing a new segmentation
+architecture or uncertainty method, we take a standard 3D U-Net and ask whether
+simple, interpretable models can predict---from the model's own stochastic behaviour
+(Monte-Carlo dropout with test-time augmentation)---when an output's whole-tumour
+volume error exceeds a clinically motivated threshold ($\geq 25\%$ and $\geq 1$~mL)
+fixed before evaluation. Case-level features spanning uncertainty, inter-prediction
+disagreement, and boundary/shape are compared, using logistic regression and
+gradient boosting, against predicted-volume-only and standard-uncertainty baselines,
+with patient-level data splits and a single locked test evaluation. In a preliminary
+study on publicly available, expert-annotated MRI, the segmenter reached whole-tumour
+Dice $0.81$; reference-free features predicted consequential volume errors with
+AUROC~$\approx 0.88$, clearly exceeding the trivial baseline. Their advantage over
+standard uncertainty was positive but not statistically significant on the small test
+set, except for severe ($\geq 40\%$) errors, where prediction-disagreement
+significantly outperformed uncertainty ($p=0.03$). At $90\%$ sensitivity, roughly half
+of cases were retainable for automation with about $6\%$ residual error; combining all
+features reduced performance. These results provide an honest, reproducible triage
+baseline and motivate validation on larger data. This is a research pipeline, not a
+clinical decision system.
+
+\vspace{4pt}
+\noindent\textbf{Keywords:} brain tumour MRI; segmentation reliability; volumetric
+error; uncertainty; quality control; deep learning
+\end{abstract}
+
+% ---------------------------------------------------------------- 1 Intro
+\section{Introduction}
+Gliomas are among the most common and aggressive primary brain tumours, and magnetic
+resonance imaging (MRI) is the principal modality for their diagnosis, treatment
+planning and longitudinal monitoring~\cite{weller2021}. A central quantitative output
+of this imaging is \emph{tumour volume}: changes in the volume of the whole tumour,
+tumour core and enhancing region over time are used to assess disease progression and
+treatment response, and underpin established response-assessment criteria such as
+RANO, which defines progression in part through a $\geq 25\%$ increase in tumour
+burden~\cite{wen2010}. Accurate quantification of these volumes is therefore not merely
+a segmentation exercise---it directly shapes clinical interpretation.
+
+Deep learning has driven substantial progress in automated brain-tumour segmentation,
+with benchmarks such as BraTS establishing 3D convolutional architectures (e.g.,
+nnU-Net, SegResNet) as strong, reproducible baselines~\cite{isensee2021,baid2021}. In
+principle these models could automate laborious manual contouring. In practice their
+outputs cannot be trusted blindly: even high-performing models produce occasional
+failures, and a single segmentation that substantially mis-estimates tumour volume can
+propagate into an incorrect assessment of progression or response. Deploying automated
+segmentation at scale therefore requires more than an accurate model---it requires
+knowing, for each individual scan, \emph{whether the resulting output can be trusted},
+so that unreliable cases are routed to expert review while the rest are safely
+automated.
+
+Prior work has approached this reliability problem from several directions, and each
+leaves a specific gap. Uncertainty quantification---Monte-Carlo dropout, deep ensembles
+and test-time augmentation---yields voxel-wise uncertainty maps, and the QU-BraTS
+benchmark showed that such estimates carry information about where a model is likely to
+err, while also concluding that no single uncertainty method dominates~\cite{mehta2022}.
+However, these estimates are evaluated and rewarded mainly at the voxel level. Jungo,
+Balsiger and Reyes found that uncertainty well-calibrated at the dataset level becomes
+\emph{miscalibrated at the subject level}, with limited ability to localise error, even
+though aggregating voxel uncertainty to the case level can still flag clearly failed
+segmentations~\cite{jungo2020}. This motivates treating case-level reliability as a
+prediction task in its own right. Reference-free quality-control methods address the
+case level---reverse classification accuracy predicts quality without ground
+truth~\cite{valindria2017}, and learned quality predictors flag failures at population
+scale~\cite{robinson2019}---but both target \emph{overlap} quality rather than volume
+error, are not framed against a pre-specified clinical threshold, and are not reported
+as an operational triage outcome. More recent work provides calibrated volumetric
+uncertainty and conformal guarantees: evidential ensembles yield calibrated volume
+estimates for meningioma segmentation with external validation~\cite{guennoun2026}, and
+conformal methods give predictive intervals for volume that remain valid under covariate
+shift~\cite{lambert2024}. These produce an \emph{uncertainty estimate or interval}, not
+a \emph{decision} about whether a given case is wrong enough to matter clinically. A
+related line characterises the volumetric \emph{bias} of soft-Dice-trained models, but
+at the population and theoretical level rather than as a per-case
+prediction~\cite{bertels2019}. Reliability studies under distribution shift~\cite{shet2026}
+and selective-prediction triage~\cite{sharma2026} are emerging; and reference-free
+indicators have in some settings proved insufficient for subtle errors~\cite{bricout2026},
+a cautionary result any case-level reliability claim must confront honestly.
+
+Across this literature three gaps recur: reliability is related to overlap metrics
+rather than to \emph{volume error} specifically; error is seldom defined against a
+\emph{pre-specified, clinically motivated threshold}; and results are rarely reported as
+an operational \emph{triage} outcome---how many cases can be safely automated at a fixed
+error-detection sensitivity.
+
+In this work we study segmentation reliability as the case-level prediction of
+consequential volume error. We take a standard segmenter and ask whether simple,
+interpretable models can predict---from the model's own stochastic behaviour---when an
+output's whole-tumour volume error exceeds a threshold fixed in advance on clinical
+grounds. We do not claim a novel uncertainty estimator, a calibration method or a
+statistical coverage guarantee; those have been studied elsewhere. Our contributions
+are: (i) we \textbf{formulate} segmentation reliability as the case-level prediction of
+consequential volume error, with the endpoint pre-specified and frozen before test
+evaluation; (ii) we \textbf{compare feature families} (uncertainty, prediction
+disagreement, boundary/morphology) against trivial and single-best-uncertainty
+baselines with a paired bootstrap, and additionally probe whether the signals indicate
+the \emph{direction} of error; and (iii) we \textbf{evaluate} with triage-oriented
+metrics on held-out patients, reporting failure cases and negative findings alongside
+successes.
+
+% ---------------------------------------------------------------- 2 Methods
+\section{Materials and Methods}
+
+\subsection{Data and splits}
+We use publicly available, expert-annotated multi-parametric brain-tumour MRI (the
+Medical Segmentation Decathlon brain-tumour task, derived from BraTS), comprising four
+co-registered modalities (FLAIR, T1, T1-contrast, T2) with reference masks for the
+nested regions whole tumour (WT), tumour core (TC) and enhancing tumour (ET). Cases are
+partitioned \emph{by patient} into four disjoint sets---segmenter training ($n{=}218$),
+segmenter validation ($n{=}24$), risk-model development ($n{=}145$) and a locked risk
+test set ($n{=}97$)---so that no patient appears in more than one set and the risk
+models never see the segmenter's training cases.
+
+\subsection{Segmentation model (Model~1)}
+We reuse a standard residual 3D U-Net (MONAI) as a fixed tool, not a contribution. It
+predicts the three nested regions from $96^{3}$ patches, trained with a Dice loss, AdamW
+with a cosine schedule, mixed precision, and random flips/intensity augmentation for 80
+epochs; the checkpoint maximising validation mean Dice is retained. Dropout ($p{=}0.1$)
+in every residual unit makes Monte-Carlo dropout usable at inference.
+
+\subsection{Reference-free features (Model~2 inputs)}
+For each held-out scan we run $T{=}5$ stochastic forward passes with dropout active,
+each using a different axis-flip (test-time augmentation). From the resulting set of
+soft predictions we compute case-level features without the reference mask:
+(i) \emph{uncertainty} summaries (mean/entropy of the predictive distribution inside and
+around the predicted region); (ii) \emph{disagreement} between passes (coefficient of
+variation of predicted volume, mean pairwise Dice between passes); and
+(iii) \emph{boundary/morphology} descriptors (fraction of ``undecided'' boundary volume,
+number and size of connected components, surface-to-volume ratio). We compare five
+feature sets: \textsf{volume\_only} (trivial baseline, predicted volume alone),
+\textsf{uncertainty} (standard baseline), \textsf{disagreement},
+\textsf{boundary\_morphology} (candidate) and \textsf{combined} (all features).
+
+\subsection{Endpoint (pre-specified)}
+A segmentation is deemed to contain a \emph{consequential volume error} when its WT
+relative volume error $|V_{\text{pred}}-V_{\text{ref}}|/V_{\text{ref}} \geq 0.25$ and
+$|V_{\text{pred}}-V_{\text{ref}}| \geq 1$~mL. The $25\%$ threshold is motivated by the
+RANO progression criterion~\cite{wen2010}; the $1$~mL floor prevents tiny lesions from
+being flagged over sub-millilitre deviations. The endpoint, feature sets, primary model
+and primary metric were committed to version control \emph{before} any evaluation on the
+test set (pre-registration). Four secondary endpoints are reported in full: WT at $10\%$
+and $40\%$ relative error, TC at $25\%$, and WT Dice${<}0.8$.
+
+\subsection{Risk models and evaluation}
+Per endpoint we train two interpretable risk models---L2-regularised logistic regression
+(pre-specified primary) and gradient boosting---mapping features to a risk score. On the
+development set, models and an operating threshold (set for $90\%$ sensitivity) are
+selected using repeated ($5\times5$) stratified cross-validation, then frozen. The frozen
+models are evaluated \emph{once} on the locked test set. We report AUROC and AUPRC with
+$2000$-sample bootstrap $95\%$ confidence intervals, and, at the frozen threshold,
+sensitivity, false-alert rate, the fraction of cases retainable for automation and the
+residual consequential-error rate among retained cases. Differences between feature sets
+are assessed with a paired bootstrap (difference, $95\%$ CI, two-sided $p$).
+
+% ---------------------------------------------------------------- 3 Results
+\section{Results}
+
+\subsection{Segmentation quality (Model~1)}
+On the locked test patients the reused segmenter achieved the Dice and volume-error
+levels in Table~\ref{tab:seg}---whole-tumour Dice $0.81$, with substantial case-to-case
+volume error. This is below top BraTS benchmarks (expected for a single model trained on
+a consumer GPU) and, importantly, leaves a realistic mix of reliable and unreliable
+cases for the risk stage.
+
+\begin{table}[htbp]
+\centering
+\caption{Model~1 segmentation quality on the locked test set ($n{=}97$).}
+\label{tab:seg}
+\begin{tabular}{lccc}
+\toprule
+Region & Dice (mean) & Dice (median) & Rel.\ volume error (median) \\
+\midrule
+Whole tumour (WT) & 0.812 & 0.854 & 0.123 \\
+Tumour core (TC)  & 0.703 & 0.781 & 0.223 \\
+Enhancing (ET)    & 0.725 & 0.828 & 0.148 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Predicting consequential volume error (primary endpoint)}
+On the primary endpoint ($34/97$ positives, prevalence $35\%$), all feature sets
+predicted consequential volume errors well (Table~\ref{tab:primary}). The candidate
+boundary/morphology set attained the highest AUROC ($0.880$), with prediction
+disagreement close behind ($0.875$); both exceeded the standard uncertainty baseline
+($0.855$) and clearly exceeded the trivial volume-only baseline ($0.827$). The
+\textsf{combined} set underperformed its components ($0.847$), consistent with
+overfitting on a small sample.
+
+\begin{table}[htbp]
+\centering
+\caption{Primary endpoint on the locked test set (logistic regression, $n{=}97$,
+$34$ positives). Operating point at the development-set threshold for $90\%$
+sensitivity. CI: $95\%$ bootstrap.}
+\label{tab:primary}
+\begin{tabular}{lcccc}
+\toprule
+Feature set & AUROC [95\% CI] & AUPRC & Sens. & Retained frac. \\
+\midrule
+volume\_only (trivial)            & 0.827 [0.73, 0.91] & 0.72 & 0.94 & 0.30 \\
+uncertainty (standard)            & 0.855 [0.77, 0.92] & 0.77 & 0.94 & 0.40 \\
+disagreement                      & 0.875 [0.80, 0.94] & 0.78 & 0.85 & 0.53 \\
+\textbf{boundary\_morphology}     & \textbf{0.880 [0.81, 0.94]} & 0.79 & 0.91 & 0.50 \\
+combined                          & 0.847 [0.76, 0.92] & 0.78 & 0.91 & 0.37 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+At the frozen operating point the candidate flagged $91\%$ of consequential errors while
+\textbf{retaining $\approx 50\%$ of cases for automation}, with a residual
+consequential-error rate of only $\approx 6\%$ among retained cases---halving the volume
+subject to manual review at the chosen sensitivity. Figure~\ref{fig:riskcov} shows the
+corresponding risk--coverage behaviour.
+
+\begin{figure}[htbp]
+\centering
+% Replace with your outputs/risk_msd/risk_test_risk_coverage.png
+\includegraphics[width=0.7\linewidth]{risk_coverage.png}
+\caption{Risk--coverage curve on the locked test set: consequential-error rate among
+retained cases as a function of the fraction retained for automation (primary endpoint).}
+\label{fig:riskcov}
+\end{figure}
+
+\subsection{Statistical comparison and secondary endpoints}
+Paired-bootstrap comparisons on the primary endpoint showed the candidate's advantage
+over standard uncertainty to be positive but \emph{not} statistically significant
+(boundary vs.\ uncertainty $\Delta{=}{+}0.025$, $p{=}0.28$), reflecting the limited test
+size. Across secondary endpoints (Table~\ref{tab:secondary}) disagreement and
+boundary/morphology were consistently strongest among volume endpoints, while standard
+uncertainty was strongest for the Dice-based endpoint (as expected). The one clearly
+significant improvement over standard uncertainty was for \emph{severe} volume errors
+(WT~$\geq 40\%$): prediction-disagreement vs.\ uncertainty $\Delta{=}{+}0.043$
+($p{=}0.034$), and vs.\ the trivial baseline $\Delta{=}{+}0.084$ ($p{=}0.035$).
+
+\begin{table}[htbp]
+\centering
+\caption{AUROC by endpoint (logistic regression) on the locked test set. Bold marks the
+best feature set per endpoint. ``sig.'': candidate significantly beats standard
+uncertainty by a paired bootstrap ($p<0.05$).}
+\label{tab:secondary}
+\begin{tabular}{lccccc}
+\toprule
+Endpoint & vol.\ only & uncertainty & disagree. & boundary & sig.? \\
+\midrule
+Primary (WT $\geq$25\%)      & 0.827 & 0.855 & 0.875 & \textbf{0.880} & no \\
+WT $\geq$10\%                & 0.846 & 0.840 & \textbf{0.876} & 0.861 & no \\
+WT $\geq$40\% (severe)       & 0.829 & 0.871 & \textbf{0.914} & 0.893 & \textbf{yes} \\
+TC $\geq$25\%                & 0.824 & 0.847 & \textbf{0.861} & 0.857 & no \\
+WT Dice$<$0.8                & 0.802 & \textbf{0.925} & 0.941 & 0.935 & (unc.\ best) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ---------------------------------------------------------------- 4 Discussion
+\section{Discussion}
+Readily available, reference-free signals---chiefly inter-prediction disagreement and
+boundary/shape descriptors---predict consequential whole-tumour volume errors with
+AUROC~$\approx 0.88$ and support a practical triage operating point that halves the
+review burden at $90\%$ sensitivity. Two findings deserve emphasis for their honesty.
+First, while the candidate features consistently edge the standard uncertainty baseline,
+the advantage is statistically conclusive only for \emph{severe} errors; on the primary
+endpoint the small test set cannot distinguish the methods. Standard uncertainty is thus
+a strong baseline, and claims of superiority should be made cautiously. Second,
+combining all features degraded performance relative to their best subset, a clear
+overfitting signal that argues for simple, interpretable models on datasets of this
+size. A single disagreement feature (mean inter-pass Dice) nearly matched the full
+model, suggesting that much of the usable signal is concentrated in pass-to-pass
+agreement.
+
+% ---------------------------------------------------------------- 5 Limitations
+\section{Limitations}
+This is a preliminary study. The test set is small ($n{=}97$, $34$ positives), yielding
+wide confidence intervals and limited power to separate close methods; the segmenter is
+a single modest model trained on a consumer GPU rather than a tuned ensemble; and the
+evaluation is retrospective on one dataset. We make no clinical claims: the system is a
+research pipeline, not a decision-support tool, and would require large-scale and
+prospective validation before any clinical consideration. The natural next step is to
+repeat the identical, pre-registered pipeline on the full BraTS~2021 cohort, whose larger
+test set should sharpen the comparison against standard uncertainty.
+
+% ---------------------------------------------------------------- 6 Conclusion
+\section{Conclusion}
+We framed segmentation reliability as the case-level prediction of consequential volume
+error against a pre-specified clinical threshold, and showed that simple models over
+reference-free features flag such errors well, clearly beating a trivial baseline and
+significantly beating standard uncertainty for severe errors, while enabling safe
+partial automation. Reported honestly---including a null result on the primary endpoint
+and an overfitting finding---the study offers a reproducible triage baseline and a clear
+path to a powered confirmation.
+
+% ---------------------------------------------------------------- Repro
+\section*{Reproducibility}
+All code, the pre-registered protocol (committed before test evaluation) and the analysis
+scripts are available in the project repository. The error endpoint was frozen in version
+control prior to the single, locked test evaluation.
+
+% ---------------------------------------------------------------- References
+\begin{thebibliography}{99}
+\small
+\bibitem{weller2021} M.~Weller \emph{et al.}, ``EANO guidelines on the diagnosis and
+treatment of diffuse gliomas of adulthood,'' \emph{Nat.\ Rev.\ Clin.\ Oncol.},
+18(3):170--186, 2021.
+\bibitem{wen2010} P.~Y.~Wen \emph{et al.}, ``Updated response assessment criteria for
+high-grade gliomas: RANO working group,'' \emph{J.\ Clin.\ Oncol.}, 28(11):1963--1972,
+2010.
+\bibitem{isensee2021} F.~Isensee \emph{et al.}, ``nnU-Net: a self-configuring method for
+deep learning-based biomedical image segmentation,'' \emph{Nat.\ Methods},
+18(2):203--211, 2021.
+\bibitem{baid2021} U.~Baid \emph{et al.}, ``The RSNA-ASNR-MICCAI BraTS 2021 benchmark on
+brain tumor segmentation and radiogenomic classification,'' arXiv:2107.02314, 2021.
+(SegResNet: A.~Myronenko, BrainLes@MICCAI 2018, arXiv:1810.11654.)
+\bibitem{mehta2022} R.~Mehta \emph{et al.}, ``QU-BraTS: MICCAI BraTS 2020 challenge on
+quantifying uncertainty in brain tumor segmentation,'' \emph{MELBA}, 2022.
+arXiv:2112.10074.
+\bibitem{jungo2020} A.~Jungo, F.~Balsiger, M.~Reyes, ``Analyzing the quality and
+challenges of uncertainty estimations for brain tumor segmentation,'' \emph{Front.\
+Neurosci.}, 14:282, 2020.
+\bibitem{valindria2017} V.~V.~Valindria \emph{et al.}, ``Reverse classification accuracy:
+predicting segmentation performance in the absence of ground truth,'' \emph{IEEE TMI},
+36(8):1597--1606, 2017.
+\bibitem{robinson2019} R.~Robinson \emph{et al.}, ``Automated quality control in image
+segmentation: application to the UK Biobank cardiovascular MR imaging study,'' \emph{J.\
+Cardiovasc.\ Magn.\ Reson.}, 21:18, 2019.
+\bibitem{guennoun2026} Y.~Guennoun \emph{et al.}, ``Segmenting with confidence through
+uncertainty quantification for brain tumor imaging,'' \emph{npj Digital Medicine}, 2026.
+\bibitem{lambert2024} B.~Lambert, F.~Forbes, S.~Doyle, M.~Dojat, ``Robust conformal
+volume estimation in 3D medical images,'' \emph{MICCAI}, 2024. arXiv:2407.19938.
+\bibitem{bertels2019} J.~Bertels \emph{et al.}, ``Optimization with soft Dice can lead to
+a volumetric bias,'' BrainLes@MICCAI, 2019. arXiv:1911.02278.
+\bibitem{shet2026} R.~D.~Shet, C.~Liang, L.~Zhang, ``Reliability analysis for BraTS-GoAT
+segmentation,'' arXiv:2608.13223, 2026. \emph{[verify before submission]}
+\bibitem{sharma2026} M.~Sharma, ``Monte Carlo dropout uncertainty and entropy-thresholded
+selective prediction for brain tumor MRI triage,'' arXiv:2607.16317, 2026.
+\emph{[verify; classification, not segmentation]}
+\bibitem{bricout2026} A.~Bricout \emph{et al.}, ``Beyond segmentation accuracy:
+understanding model reliability and failure modes in ultrasound image analysis,''
+\emph{Front.\ Med.\ Technol.}, 8, 2026. \emph{[verify before submission]}
+\end{thebibliography}
+
+\end{document}
