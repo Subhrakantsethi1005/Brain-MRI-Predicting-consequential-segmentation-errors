@@ -1,3 +1,5 @@
+> **Historical research narrative.** Some claims are superseded by the [November 2026 evidence audit](../EVIDENCE_AUDIT.md), including operating-point selection, robustness percentage, protocol deviations and conformal assumptions.
+
 # Viva Preparation — Brain-Tumour Segmentation Reliability Project
 
 > A plain-language guide to explain and defend this project in a viva. It covers:

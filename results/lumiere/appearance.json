@@ -1,0 +1,36 @@
+{
+  "n_intervals": 110,
+  "dir_disagree_rate": 0.4909090909090909,
+  "H4_image_level": {
+    "ct1_ssim": {
+      "auroc_dir": 0.43386243386243384,
+      "spearman_mag": -0.1686765998692604,
+      "spearman_p": 0.07814861814797457
+    },
+    "ct1_wass": {
+      "auroc_dir": 0.42328042328042326,
+      "spearman_mag": 0.09329846944525844,
+      "spearman_p": 0.3323151971569078
+    },
+    "ct1_mad": {
+      "auroc_dir": 0.498015873015873,
+      "spearman_mag": 0.1654216351464058,
+      "spearman_p": 0.08415739912172432
+    },
+    "flair_ssim": {
+      "auroc_dir": 0.3759920634920635,
+      "spearman_mag": -0.19501386290377115,
+      "spearman_p": 0.04119088265143385
+    },
+    "flair_wass": {
+      "auroc_dir": 0.44642857142857145,
+      "spearman_mag": 0.19599666388657214,
+      "spearman_p": 0.0401603130270044
+    },
+    "flair_mad": {
+      "auroc_dir": 0.42757936507936506,
+      "spearman_mag": 0.15100421522439872,
+      "spearman_p": 0.11532626107233868
+    }
+  }
+}

@@ -1,3 +1,5 @@
+> **Historical research narrative.** Some claims are superseded by the [November 2026 evidence audit](../EVIDENCE_AUDIT.md), including operating-point selection, robustness percentage, protocol deviations and conformal assumptions.
+
 # When Two Expert Tools Flip a Coin: Reference-Free Reliability of Automated Longitudinal Volume Change in Glioma
 
 ::center:: Subhrakant Sethi, Ayush Singh, Abhayaditya Sogi, Pratyaksh Singh

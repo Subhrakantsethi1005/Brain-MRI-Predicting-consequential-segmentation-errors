@@ -22,7 +22,7 @@ four co-registered modalities per case); the same pipeline targets BraTS 2021
 (1,251 patients) through a configuration switch, with the dataset's label
 convention (`enhancing_label`, `core_labels`) and file layout carried in the
 config. Each patient is assigned to exactly one of four disjoint splits
-(`scripts/00_make_splits.py`): `seg_train` (45 %), `seg_val` (5 %), `risk_dev`
+(`scripts/pipeline/00_make_splits.py`): `seg_train` (45 %), `seg_val` (5 %), `risk_dev`
 (30 %) and `risk_test` (20 %). The segmenter is trained and selected only on
 `seg_train`/`seg_val`; risk models are developed on `risk_dev` and evaluated once
 on `risk_test`. This separation is essential: training the risk model on the
@@ -80,7 +80,7 @@ miss on a tiny lesion from being counted. Reference volume error is computed fro
 the expert mask (`metrics.py`). Secondary endpoints — WT at 10 % and 40 %, TC at
 25 %, and WT Dice < 0.80 — are reported in full whatever they show and are not
 used to select the primary result. The endpoint file was committed before any
-test evaluation; `scripts/04_evaluate_test.py` refuses to run with uncommitted
+test evaluation; `scripts/pipeline/04_evaluate_test.py` refuses to run with uncommitted
 changes to it, and a lock file records each look at the test set.
 
 ## 3.6 Risk models and comparison (`risk.py`)

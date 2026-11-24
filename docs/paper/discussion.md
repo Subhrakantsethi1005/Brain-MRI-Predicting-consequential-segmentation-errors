@@ -1,3 +1,5 @@
+> **Historical research narrative.** Some claims are superseded by the [November 2026 evidence audit](../EVIDENCE_AUDIT.md), including operating-point selection, robustness percentage, protocol deviations and conformal assumptions.
+
 # Discussion (draft)
 
 > Status: draft reading of the MSD feasibility results (§4). To be revisited if

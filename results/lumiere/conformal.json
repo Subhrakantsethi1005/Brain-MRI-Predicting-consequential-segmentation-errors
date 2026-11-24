@@ -1,0 +1,46 @@
+{
+  "n_rows": 221,
+  "n_patients": 70,
+  "pd_base_rate": 0.7964,
+  "method": "CRC FNR-control, patient-disjoint calibration",
+  "frozen": {
+    "alpha_0.05": {
+      "tau": 1.06,
+      "test_fnr": 0.1067,
+      "test_coverage": 0.0968,
+      "holds": false
+    },
+    "alpha_0.1": {
+      "tau": 1.82,
+      "test_fnr": 0.2267,
+      "test_coverage": 0.2258,
+      "holds": false
+    },
+    "alpha_0.2": {
+      "tau": 3.02,
+      "test_fnr": 0.24,
+      "test_coverage": 0.2581,
+      "holds": false
+    }
+  },
+  "robustness": {
+    "alpha_0.05": {
+      "mean_test_fnr": 0.0638,
+      "mean_coverage": 0.078,
+      "frac_splits_fnr_le_alpha": 0.27,
+      "n_splits": 200
+    },
+    "alpha_0.1": {
+      "mean_test_fnr": 0.0957,
+      "mean_coverage": 0.108,
+      "frac_splits_fnr_le_alpha": 0.62,
+      "n_splits": 200
+    },
+    "alpha_0.2": {
+      "mean_test_fnr": 0.1989,
+      "mean_coverage": 0.2245,
+      "frac_splits_fnr_le_alpha": 0.555,
+      "n_splits": 200
+    }
+  }
+}

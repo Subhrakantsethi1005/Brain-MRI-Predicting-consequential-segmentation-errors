@@ -1,104 +1,112 @@
-# Predicting Consequential Volume Errors in Automated Brain-Tumour MRI Segmentation
+# BrainRisk
 
-> **One-line summary:** A system that looks at an AI's brain-tumour outline and predicts — *without ever seeing the correct answer* — whether the outline got the tumour's **size** badly wrong, so risky cases can be sent to a doctor and safe ones trusted automatically.
+### Reliability of brain tumour MRI volume measurements
 
-**Type:** University AI course project. &nbsp;|&nbsp; **Status:** study complete.
-**Team:** Subhrakant Sethi, Ayush Singh, Abhayaditya Sogi, Pratyaksh Singh — B.Tech Biotechnology, Thapar Institute of Engineering and Technology, Patiala.
+[![BrainRisk presentation cover](docs/presentation/preview.png)](docs/presentation/BrainRisk.pptx)
 
-> ⚠️ This is a **research pipeline, not a clinical decision system.**
+**When should an automated tumour measurement receive human review?** This research project studies that question at two levels: volume error on one MRI scan, and progression calls across repeated scans.
 
----
+Subhrakant Sethi, Ayush Singh, Abhayaditya Sogi and Pratyaksh Singh  
+B.Tech Biotechnology, Thapar Institute of Engineering and Technology
 
-## 1. Problem & Motivation
-Doctors measure a brain tumour's **volume** from MRI to track whether it is growing or shrinking (the RANO guideline calls a ≥25% increase "progression"). AI can outline (**segment**) the tumour automatically, but it occasionally makes a bad mistake on a single scan — **without warning** — and a wrong volume could change a treatment decision. In the real world there is no "correct answer" to check against at the time of use.
+[Evidence audit](docs/EVIDENCE_AUDIT.md) · [Reproduce](docs/REPRODUCING.md) · [Demonstration](demo/README.md) · [Presentation](docs/presentation/README.md) · [Research documents](docs/README.md)
 
-**Research question:** *For this one scan, can we trust the AI's tumour-size measurement, or should a human review it?*
+## What we built
 
-## 2. Our Approach (two parts)
-| Part | What it does | Our contribution? |
-|---|---|---|
-| **Model 1 — Segmenter** | A standard **3D U-Net** (MONAI) draws the tumour outline | No — reused as a fair baseline |
-| **Model 2 — Reliability checker** | Predicts, per scan, whether the volume error is **"consequential"** (≥25% **and** ≥1 mL), using only the AI's own behaviour | **Yes — this is the contribution** |
+A standard MONAI residual 3D U-Net segments four MRI sequences into tumour core (TC), whole tumour (WT) and enhancing tumour (ET). Repeated dropout and flip-augmentation predictions provide reference-free uncertainty, disagreement and shape features. Lightweight quality-control models try to flag consequential volume errors without requiring a reference mask at inference.
 
-**How Model 2 works (reference-free):** run the segmenter several times with small random changes (**Monte-Carlo dropout + test-time augmentation**); if the attempts disagree, the AI is unsure. From this we build case-level **features** (uncertainty, inter-run disagreement, boundary/shape) and train a **simple, interpretable model** (logistic regression) to output a **risk score**. A threshold turns it into a **triage** decision: trust vs. send-to-human.
+We then studied serial glioblastoma scans in LUMIERE. Two existing tools, DeepBraTumIA and HD-GLIO-AUTO, produce enhancing-volume trajectories. A parameter-free agreement rule checks whether their volume-based progression calls match. Expert RANO labels let us evaluate how decision reliability differs between agreement and disagreement subsets.
 
-**Scientific rigour:** patients split **by patient** (no leakage); the error definition was **pre-registered and frozen before testing**; the test set was evaluated **once**.
+**Status:** retrospective course-project research. The data support a useful comparison and a longitudinal agreement signal. They do not establish clinical safety or a new segmentation architecture.
 
-## 3. What Has Been Done ✅
-- [x] Full, reproducible, tested pipeline (8 passing end-to-end tests).
-- [x] Segmentation model trained and evaluated (Dice + volume error).
-- [x] Reference-free feature extraction (MC-dropout + TTA).
-- [x] Pre-registered endpoint (committed before test evaluation).
-- [x] Risk models trained & compared against baselines (repeated cross-validation).
-- [x] **One-shot locked test evaluation** with AUROC, triage metrics, and paired-bootstrap significance.
-- [x] Full paper drafted — **[`docs/paper/paper.tex`](docs/paper/paper.tex)** (LaTeX), plus abstract & introduction.
-- [ ] *(next)* Full **BraTS 2021** run for a larger, powered confirmation.
+## Results supported by saved artifacts
 
-## 4. Results (preliminary — MSD dataset, locked test set *n = 97*)
+### BraTS 2023: consequence targeting did not improve QC
 
-**Segmenter (Model 1):** Whole-tumour **Dice 0.81**, tumour-core 0.70, enhancing 0.73.
+1,251 labelled cases, split into segmenter train **565**, segmenter validation **62**, risk development **379**, and risk test **245**. The training log records **59 epochs**, with best mean validation Dice **0.877** at epoch index 49 (WT **0.904**, TC **0.881**, ET **0.846**). These are validation scores.
 
-**Reliability checker (Model 2) — primary endpoint (consequential WT volume error):**
+The WT endpoint is relative volume error **>=25% AND absolute error >=1 mL**. It occurred in **23/245** test cases (9.4%). This research endpoint is distinct from a clinical RANO progression diagnosis.
 
-| Feature set | Test AUROC | Note |
-|---|---|---|
-| Predicted volume only (trivial baseline) | 0.827 | baseline |
-| Standard uncertainty | 0.855 | strong baseline |
-| Prediction disagreement | 0.875 | |
-| **Boundary / morphology (candidate)** | **0.880** | best |
-| Combined (all features) | 0.847 | overfits |
+| Method | Test AUROC | Bootstrap 95% CI |
+|---|---:|---:|
+| Best single uncertainty feature | 0.838 | 0.744–0.916 |
+| Overlap-QC logistic baseline | 0.786 | 0.681–0.880 |
+| Predicted volume alone | 0.766 | 0.666–0.855 |
+| Consequence-targeted logistic model | 0.743 | 0.620–0.854 |
 
-**Triage payoff:** at 90% sensitivity, **~50% of cases can be safely automated**, with only **~6% residual error** among the automated ones.
+The consequence model's AUROC difference versus overlap-QC was **-0.043**, CI **[-0.121, 0.019]**, p=**0.248**. We did not detect a gain. This does not prove equivalence or establish that dedicated consequence models can never help.
 
-**Honest findings (reported in full):**
-- The candidate features **clearly beat the trivial baseline**.
-- Their advantage over standard uncertainty was **not statistically significant** on this small test set — **except for severe (≥40%) errors**, where disagreement significantly beat uncertainty (*p = 0.03*).
-- Combining all features **reduced** performance (overfitting) — a reported negative finding.
+The uncertainty baseline retained 137/245 cases (~56%) with 2/137 residual consequential errors (~1.5%) at the reported 90%-sensitivity point. **The evaluator chose that point using test labels; it is retrospective performance, not a frozen deployment threshold.**
 
-## 5. Repository Structure
-```
-├── src/brainrisk/        # core library
-│   ├── data.py           # case discovery (BraTS + MSD), patient-level splits, transforms
-│   ├── model.py          # 3D U-Net + MC-dropout/flip inference
-│   ├── features.py       # reference-free case-level features
-│   ├── metrics.py        # Dice, HD95, volume errors, endpoint labels
-│   └── risk.py           # risk models, triage metrics, bootstrap tests
-├── scripts/              # pipeline, run in order 00 → 04
-│   ├── 00_make_splits.py 01_train_segmentation.py eval_segmentation.py
-│   └── 02_infer_mc.py    03_train_risk_model.py   04_evaluate_test.py
-├── configs/              # default(BraTS) / fast / msd / msd_feasibility / preregistration
-├── docs/
-│   ├── IMPLEMENTATION_PLAN.md
-│   └── paper/            # paper.tex, introduction.(md/docx), abstract.(md/docx), references.md
-└── tests/test_pipeline.py
-```
+Sources: [case features](results/brats2023/case_features.csv), [training log](results/brats2023/training_history.json), [comparison JSON](results/brats2023/optionB/flag_WT.json).
 
-## 6. How to Reproduce
+### LUMIERE: tool agreement identifies a more accurate subset
+
+The source dataset contains 91 patients and 616 expert-rated timepoints. Our evaluable subset contains **221 decisions from 70 patients**.
+
+| Automated call vs expert RANO | Balanced accuracy |
+|---|---:|
+| All eligible decisions | 0.608 |
+| Tools agree | 0.693 |
+| Tools disagree | 0.499 |
+
+Agreement-minus-disagreement gap: **0.194**, patient-clustered bootstrap 95% CI **[0.045, 0.367]**. The gap was positive in **199/200** random patient splits (99.5%). On sizeable tumours the tools agreed on the direction of change in **57/114** consecutive intervals (50%). That is agreement between tools, not clinical diagnostic accuracy.
+
+The agreement subset still had **34.7% raw decision error** on the full cohort. Agreement therefore supports research triage, not automatic clinical clearance. LUMIERE lacks manual masks, so this analysis cannot identify which tool measured the correct volume.
+
+Sources: [robustness JSON](results/lumiere/strengthen.json), [third-voter JSON](results/lumiere/threeway.json), [source dataset](https://doi.org/10.1038/s41597-022-01881-7). Protocol implementation differences and the exploratory conformal results are documented in the [audit](docs/EVIDENCE_AUDIT.md).
+
+## Contribution and novelty
+
+Our contribution is the end-to-end implementation, consequence-labelled evaluation, honest negative comparison, and investigation of agreement at the **longitudinal decision** level. The longitudinal framing is the stronger research direction in this repository.
+
+We reuse the U-Net architecture, Monte Carlo dropout, test-time augmentation, logistic regression and disagreement principles. We do not claim invention of these methods, clinical validation, or first-ever priority. Novelty is primarily in the study design and application, with limited evidence from a single longitudinal cohort. See [the evidence audit](docs/EVIDENCE_AUDIT.md) for related work and limitations.
+
+## Demonstration without a GPU or dataset download
+
 ```bash
-# 1. Environment (Python 3.12; CUDA GPU recommended)
-pip install torch==2.6.0 --index-url https://download.pytorch.org/whl/cu124
-pip install -r requirements.txt
-pytest -q                                       # synthetic end-to-end test (~2 min)
-
-# 2. Run the pipeline (MSD dataset; use configs/default.yaml for BraTS 2021)
-CFG=configs/msd.yaml
-python scripts/00_make_splits.py --config $CFG
-python scripts/01_train_segmentation.py --config $CFG
-python scripts/eval_segmentation.py --config $CFG
-python scripts/02_infer_mc.py --config $CFG
-python scripts/03_train_risk_model.py --config $CFG
-git commit configs/preregistration.yaml         # freeze the protocol before testing
-python scripts/04_evaluate_test.py --config $CFG # locked test, once
+python demo/run_demo.py
+python demo/run_demo.py --list
+python demo/run_demo.py --patient Patient-002
 ```
-Datasets are **not** included (download separately): MSD Task01_BrainTumour, or BraTS 2021.
-Tip: for a quick sanity run use `configs/msd_feasibility.yaml` (20 cases, 2 epochs).
 
-## 7. Limitations & Next Steps
-- Preliminary: small dataset/test set → wide confidence intervals; single modest segmenter; retrospective, one dataset.
-- **Next:** repeat the identical, pre-registered pipeline on the **full BraTS 2021** cohort for a powered confirmation, and explore external validation.
+The first command selects a real public-data trajectory containing a disagreement. It shows each tool's volume, running nadir, progression call and the agreement flag. It replays recorded measurements, not live MRI inference. Use `--list` for available IDs before selecting a patient.
 
-## 8. Paper & Documents
-- **Full paper:** [`docs/paper/paper.tex`](docs/paper/paper.tex) (compile on Overleaf)
-- **Abstract:** [`docs/paper/abstract.md`](docs/paper/abstract.md)
-- **Introduction & references:** [`docs/paper/introduction.md`](docs/paper/introduction.md), [`docs/paper/references.md`](docs/paper/references.md)
-- **Design & plan:** [`docs/IMPLEMENTATION_PLAN.md`](docs/IMPLEMENTATION_PLAN.md)
+## Repository layout
+
+```text
+src/brainrisk/       Core segmentation, features, metrics and risk models
+scripts/pipeline/   Numbered training and evaluation commands
+scripts/brats/      BraTS characterization and QC comparison
+scripts/longitudinal/ LUMIERE analyses and shared helpers
+scripts/data/       Acquisition helper
+scripts/publication/ Figure and document generation
+configs/            Dataset and experiment settings
+results/            Versioned evidence snapshots
+demo/               Offline real-data replay and provenance
+docs/paper/         Manuscripts, protocols and original figures
+docs/exports/       Historical PDF, Word and Overleaf exports
+docs/research/      Literature notes and exploratory reports
+docs/presentation/  Deck and presenter guide
+tests/              Synthetic pipeline and demonstration checks
+```
+
+Large MRI datasets and model checkpoints are excluded. New experiment outputs go to `outputs/`; preserved evidence belongs in `results/`. Old paths are mapped in [REORGANIZATION.json](docs/REORGANIZATION.json).
+
+## Training and reproduction
+
+```bash
+python -m venv .venv
+# Activate the environment, then install an appropriate PyTorch build.
+pip install -r requirements.txt
+pip install -e .
+pytest -q
+python scripts/pipeline/00_make_splits.py --config configs/brats2023.yaml
+python scripts/pipeline/01_train_segmentation.py --config configs/brats2023.yaml
+```
+
+Set the dataset root in the config first. Training uses 128-cubed patches, AdamW (learning rate 1e-4, weight decay 1e-5), Dice loss, dropout 0.1 and a cosine schedule. The config's 150-epoch budget is a planned maximum; the committed log records 59 epochs. See [full reproduction instructions](docs/REPRODUCING.md).
+
+## Boundaries of the evidence
+
+There is no external clinical validation. BraTS is cross-sectional; LUMIERE volume-only calls simplify expert RANO, which includes other imaging and clinical information. Repeated splits reuse one cohort. The exploratory conformal implementation does not establish a patient-level safety guarantee. Historical manuscripts contain older stronger claims; the root README and audit describe the defensible current interpretation.

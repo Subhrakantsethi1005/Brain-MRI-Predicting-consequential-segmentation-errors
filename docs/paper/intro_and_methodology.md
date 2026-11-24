@@ -182,7 +182,7 @@ larger glioma corpora (§9) through a configuration switch that carries each
 dataset's label convention and file layout.
 
 Each patient was assigned to exactly one of four disjoint splits
-(`scripts/00_make_splits.py`), so no patient appears in more than one:
+(`scripts/pipeline/00_make_splits.py`), so no patient appears in more than one:
 
 | Split | Share | Purpose |
 |---|---|---|

@@ -119,7 +119,7 @@ def _write_synthetic_brats(root, n, shape=(40, 40, 40), seed=0):
 
 
 def _run(script, cwd, *args):
-    r = subprocess.run([sys.executable, str(REPO / "scripts" / script), *args], cwd=cwd,
+    r = subprocess.run([sys.executable, str(REPO / "scripts" / "pipeline" / script), *args], cwd=cwd,
                        capture_output=True, text=True)
     assert r.returncode == 0, r.stdout + r.stderr
     return r.stdout
@@ -166,6 +166,6 @@ def test_end_to_end(tmp_path):
     rep = pd.read_csv(tmp_path / "outputs/risk/risk_test_report.csv")
     assert {"combined", "uncertainty", "volume_only", "best_single"} <= set(rep.group)
     # A second look must be explicit.
-    r = subprocess.run([sys.executable, str(REPO / "scripts/04_evaluate_test.py")], cwd=tmp_path,
+    r = subprocess.run([sys.executable, str(REPO / "scripts/pipeline/04_evaluate_test.py")], cwd=tmp_path,
                        capture_output=True, text=True)
     assert r.returncode != 0 and "already evaluated" in r.stderr

@@ -19,7 +19,7 @@ use the Kaggle mirror while checking the licence terms). If access is slow, star
 **MSD Task01_BrainTumour** (CC-BY-SA, downloads straight away). MSD comes from BraTS 2016/17, so it
 overlaps with BraTS 2021 and you must not combine the two.
 
-Each patient is assigned to exactly one split (`scripts/00_make_splits.py`):
+Each patient is assigned to exactly one split (`scripts/pipeline/00_make_splits.py`):
 
 | Split | Share | ≈ cases | Used for |
 |---|---|---|---|
@@ -69,7 +69,7 @@ secondary. The paper's claim depends on `combined` or `boundary_morphology` beat
 and `best_single` on `risk_test`, using a paired bootstrap. If they don't, that is still a result and gets
 reported.
 
-## Evaluation (`scripts/04_evaluate_test.py`)
+## Evaluation (`scripts/pipeline/04_evaluate_test.py`)
 
 AUROC and AUPRC (shown next to prevalence) with 95 % bootstrap CIs. The threshold is fixed on dev for
 90 % sensitivity, and the test report gives the sensitivity actually achieved, the false-alert rate,

@@ -1,0 +1,3622 @@
+{
+  "summary": {
+    "n_patients_total": 91,
+    "n_patients_shown": 70,
+    "n_eval": 221,
+    "agree_frac": 0.561,
+    "ba_agree": 0.693,
+    "ba_disagree": 0.499,
+    "ba_all": 0.608,
+    "dir_agree_pct": 50.0,
+    "dir_pairs": 116,
+    "splits_positive_pct": 99.5,
+    "gap": 0.194,
+    "gap_ci": [
+      0.045,
+      0.367
+    ],
+    "auroc_score": 0.596
+  },
+  "patients": {
+    "Patient-002": [
+      {
+        "timepoint": "week-000",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 3.62,
+        "vh": 16.826
+      },
+      {
+        "timepoint": "week-003",
+        "week": 3,
+        "label": "Post-Op",
+        "vd": 24.931,
+        "vh": 0.126
+      },
+      {
+        "timepoint": "week-037",
+        "week": 37,
+        "label": "PD",
+        "vd": 0.07,
+        "vh": 4.884,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-047",
+        "week": 47,
+        "label": "PD",
+        "vd": 9.135,
+        "vh": 29.414,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-003": [
+      {
+        "timepoint": "week-000-2",
+        "week": 0,
+        "label": "Post-Op",
+        "vd": 51.297,
+        "vh": 0.549
+      },
+      {
+        "timepoint": "week-038",
+        "week": 38,
+        "label": "PD",
+        "vd": 8.975,
+        "vh": 46.274,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-004": [
+      {
+        "timepoint": "week-000-1",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 26.142,
+        "vh": 43.537
+      },
+      {
+        "timepoint": "week-000-2",
+        "week": 0,
+        "label": "Post-Op",
+        "vd": 66.518,
+        "vh": 0.022
+      },
+      {
+        "timepoint": "week-038",
+        "week": 38,
+        "label": "PD",
+        "vd": 6.08,
+        "vh": 15.749,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-041",
+        "week": 41,
+        "label": "Post-Op",
+        "vd": 23.09,
+        "vh": 0.186
+      },
+      {
+        "timepoint": "week-057",
+        "week": 57,
+        "label": "PD",
+        "vd": 29.674,
+        "vh": 10.443,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-071",
+        "week": 71,
+        "label": "PR",
+        "vd": 0.46,
+        "vh": 0.613,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 0
+      },
+      {
+        "timepoint": "week-086",
+        "week": 86,
+        "label": "PD",
+        "vd": 1.451,
+        "vh": 5.287,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-005": [
+      {
+        "timepoint": "week-000-1",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 44.401,
+        "vh": 44.238
+      },
+      {
+        "timepoint": "week-000-2",
+        "week": 0,
+        "label": "Post-Op",
+        "vd": 82.76,
+        "vh": 0.481
+      },
+      {
+        "timepoint": "week-015",
+        "week": 15,
+        "label": "SD",
+        "vd": 41.48,
+        "vh": 1.2,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 0
+      }
+    ],
+    "Patient-006": [
+      {
+        "timepoint": "week-000",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 31.427,
+        "vh": 40.771
+      },
+      {
+        "timepoint": "week-015",
+        "week": 15,
+        "label": "SD",
+        "vd": 59.009,
+        "vh": 3.546
+      },
+      {
+        "timepoint": "week-039",
+        "week": 39,
+        "label": "SD",
+        "vd": 70.876,
+        "vh": 0.575999691009521,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 0
+      },
+      {
+        "timepoint": "week-112",
+        "week": 112,
+        "label": "PD",
+        "vd": 47.27,
+        "vh": 2.575,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-131",
+        "week": 131,
+        "label": "PD",
+        "vd": 30.203,
+        "vh": 0.534,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-135",
+        "week": 135,
+        "label": "PD",
+        "vd": 25.575,
+        "vh": 3.035,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-007": [
+      {
+        "timepoint": "week-000",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 25.115,
+        "vh": 9.906
+      },
+      {
+        "timepoint": "week-055",
+        "week": 55,
+        "label": "PD",
+        "vd": 0.206,
+        "vh": 0.709
+      },
+      {
+        "timepoint": "week-064",
+        "week": 64,
+        "label": "PD",
+        "vd": 0.269,
+        "vh": 3.204,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-075",
+        "week": 75,
+        "label": "PD",
+        "vd": 2.699,
+        "vh": 8.459,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-089",
+        "week": 89,
+        "label": "PD",
+        "vd": 12.888,
+        "vh": 5.929,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-105",
+        "week": 105,
+        "label": "PD",
+        "vd": 12.998,
+        "vh": 12.289,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-008": [
+      {
+        "timepoint": "week-000",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 8.848,
+        "vh": 12.681
+      },
+      {
+        "timepoint": "week-017",
+        "week": 17,
+        "label": "PD",
+        "vd": 17.075,
+        "vh": 2.9159996523857097
+      },
+      {
+        "timepoint": "week-066",
+        "week": 66,
+        "label": "PD",
+        "vd": 9.599,
+        "vh": 0.165600006580353,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-085",
+        "week": 85,
+        "label": "PD",
+        "vd": 1.171,
+        "vh": 1.836,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-009": [
+      {
+        "timepoint": "week-000-1",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 0.395,
+        "vh": 6.327
+      },
+      {
+        "timepoint": "week-014",
+        "week": 14,
+        "label": "SD",
+        "vd": 11.413,
+        "vh": 11.592
+      },
+      {
+        "timepoint": "week-015",
+        "week": 15,
+        "label": "Post-Op",
+        "vd": 41.213,
+        "vh": 0.0143999905586243
+      },
+      {
+        "timepoint": "week-066",
+        "week": 66,
+        "label": "PD",
+        "vd": 25.424,
+        "vh": 2.31,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-010": [
+      {
+        "timepoint": "week-000",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 22.235,
+        "vh": 24.634
+      },
+      {
+        "timepoint": "week-001",
+        "week": 1,
+        "label": "Post-Op",
+        "vd": 27.66,
+        "vh": 1.762
+      },
+      {
+        "timepoint": "week-015",
+        "week": 15,
+        "label": "SD",
+        "vd": 2.309,
+        "vh": 3.103,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 0
+      }
+    ],
+    "Patient-011": [
+      {
+        "timepoint": "week-000",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 17.729,
+        "vh": 6.408
+      },
+      {
+        "timepoint": "week-003",
+        "week": 3,
+        "label": "Post-Op",
+        "vd": 9.596,
+        "vh": 0.204
+      },
+      {
+        "timepoint": "week-021",
+        "week": 21,
+        "label": "SD",
+        "vd": 0.011,
+        "vh": 1.008,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 0
+      },
+      {
+        "timepoint": "week-028",
+        "week": 28,
+        "label": "PD",
+        "vd": 3.581,
+        "vh": 6.396,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-012": [
+      {
+        "timepoint": "week-000-1",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 32.845,
+        "vh": 27.222
+      },
+      {
+        "timepoint": "week-016",
+        "week": 16,
+        "label": "SD",
+        "vd": 1.481,
+        "vh": 1.494
+      },
+      {
+        "timepoint": "week-022",
+        "week": 22,
+        "label": "Post-Op",
+        "vd": 2.351,
+        "vh": 0.117999345898628
+      },
+      {
+        "timepoint": "week-084",
+        "week": 84,
+        "label": "PD",
+        "vd": 6.676,
+        "vh": 1.31,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-013": [
+      {
+        "timepoint": "week-000",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 8.323,
+        "vh": 22.765
+      },
+      {
+        "timepoint": "week-017",
+        "week": 17,
+        "label": "SD",
+        "vd": 7.719,
+        "vh": 0.815
+      },
+      {
+        "timepoint": "week-030",
+        "week": 30,
+        "label": "PD",
+        "vd": 0.012,
+        "vh": 4.94899026554823,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-015": [
+      {
+        "timepoint": "week-000-1",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 70.552,
+        "vh": 20.84
+      },
+      {
+        "timepoint": "week-000-2",
+        "week": 0,
+        "label": "Post-Op",
+        "vd": 41.346,
+        "vh": 0.0288000411987305
+      },
+      {
+        "timepoint": "week-078",
+        "week": 78,
+        "label": "PD",
+        "vd": 10.093,
+        "vh": 0.17,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-083",
+        "week": 83,
+        "label": "PD",
+        "vd": 12.094,
+        "vh": 0.154,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-099",
+        "week": 99,
+        "label": "PD",
+        "vd": 9.121,
+        "vh": 0.0395999701023102,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-140",
+        "week": 140,
+        "label": "PD",
+        "vd": 0.009,
+        "vh": 2.873,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-145",
+        "week": 145,
+        "label": "PD",
+        "vd": 3.528,
+        "vh": 22.326,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-146",
+        "week": 146,
+        "label": "Post-Op",
+        "vd": 19.734,
+        "vh": 1.823
+      }
+    ],
+    "Patient-017": [
+      {
+        "timepoint": "week-000",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 14.198,
+        "vh": 9.397
+      },
+      {
+        "timepoint": "week-001",
+        "week": 1,
+        "label": "Post-Op",
+        "vd": 14.99,
+        "vh": 0.883
+      },
+      {
+        "timepoint": "week-016",
+        "week": 16,
+        "label": "SD",
+        "vd": 24.602,
+        "vh": 5.337,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 0
+      },
+      {
+        "timepoint": "week-035",
+        "week": 35,
+        "label": "PD",
+        "vd": 15.717,
+        "vh": 14.0609036183953,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-018": [
+      {
+        "timepoint": "week-000",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 0.199,
+        "vh": 0.747
+      },
+      {
+        "timepoint": "week-003",
+        "week": 3,
+        "label": "Post-Op",
+        "vd": 1.591,
+        "vh": 0.732
+      },
+      {
+        "timepoint": "week-017",
+        "week": 17,
+        "label": "SD",
+        "vd": 0.575,
+        "vh": 0.654,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 0
+      },
+      {
+        "timepoint": "week-034",
+        "week": 34,
+        "label": "PD",
+        "vd": 5.329,
+        "vh": 2.037,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-019": [
+      {
+        "timepoint": "week-005",
+        "week": 5,
+        "label": "Post-Op",
+        "vd": 10.154,
+        "vh": 1.835
+      },
+      {
+        "timepoint": "week-015",
+        "week": 15,
+        "label": "SD",
+        "vd": 7.885,
+        "vh": 28.14,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 0
+      },
+      {
+        "timepoint": "week-022",
+        "week": 22,
+        "label": "SD",
+        "vd": 8.679,
+        "vh": 42.486,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 0
+      },
+      {
+        "timepoint": "week-031",
+        "week": 31,
+        "label": "PD",
+        "vd": 14.37,
+        "vh": 13.07,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-055",
+        "week": 55,
+        "label": "PD",
+        "vd": 10.41,
+        "vh": 31.37,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-061",
+        "week": 61,
+        "label": "PD",
+        "vd": 7.524,
+        "vh": 22.27,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-075",
+        "week": 75,
+        "label": "PR",
+        "vd": 3.462,
+        "vh": 13.97,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 0
+      },
+      {
+        "timepoint": "week-090",
+        "week": 90,
+        "label": "PR",
+        "vd": 2.788,
+        "vh": 4.9,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 0
+      },
+      {
+        "timepoint": "week-117",
+        "week": 117,
+        "label": "PR",
+        "vd": 28.866,
+        "vh": 0.763,
+        "auto_d": 1,
+        "auto_h": 0,
+        "agree": false,
+        "expert_pd": 0
+      },
+      {
+        "timepoint": "week-137",
+        "week": 137,
+        "label": "PR",
+        "vd": 5.523,
+        "vh": 19.152,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 0
+      },
+      {
+        "timepoint": "week-138",
+        "week": 138,
+        "label": "PD",
+        "vd": 3.911,
+        "vh": 14.333,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-021": [
+      {
+        "timepoint": "week-000-1",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 4.872,
+        "vh": 6.95499461084604
+      },
+      {
+        "timepoint": "week-000-2",
+        "week": 0,
+        "label": "Post-Op",
+        "vd": 4.582,
+        "vh": 0.719
+      },
+      {
+        "timepoint": "week-022",
+        "week": 22,
+        "label": "PD",
+        "vd": 11.313,
+        "vh": 20.915905251503002,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-022": [
+      {
+        "timepoint": "week-000",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 38.307,
+        "vh": 45.561
+      },
+      {
+        "timepoint": "week-037",
+        "week": 37,
+        "label": "PD",
+        "vd": 10.939,
+        "vh": 37.154
+      },
+      {
+        "timepoint": "week-039",
+        "week": 39,
+        "label": "Post-Op",
+        "vd": 34.009,
+        "vh": 1.156
+      },
+      {
+        "timepoint": "week-045",
+        "week": 45,
+        "label": "PD",
+        "vd": 11.64,
+        "vh": 0.433,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-053",
+        "week": 53,
+        "label": "PD",
+        "vd": 3.008,
+        "vh": 18.944,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-023": [
+      {
+        "timepoint": "week-000",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 5.327,
+        "vh": 4.676
+      },
+      {
+        "timepoint": "week-097",
+        "week": 97,
+        "label": "PD",
+        "vd": 1.362,
+        "vh": 4.04
+      },
+      {
+        "timepoint": "week-111",
+        "week": 111,
+        "label": "PD",
+        "vd": 0.568,
+        "vh": 4.431,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-115",
+        "week": 115,
+        "label": "PD",
+        "vd": 1.003,
+        "vh": 5.448,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-127",
+        "week": 127,
+        "label": "PD",
+        "vd": 49.307,
+        "vh": 60.141,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-024": [
+      {
+        "timepoint": "week-001",
+        "week": 1,
+        "label": "Post-Op",
+        "vd": 2.18,
+        "vh": 0.78
+      },
+      {
+        "timepoint": "week-015",
+        "week": 15,
+        "label": "PD",
+        "vd": 7.624,
+        "vh": 0.591,
+        "auto_d": 1,
+        "auto_h": 0,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-043",
+        "week": 43,
+        "label": "PD",
+        "vd": 2.959,
+        "vh": 1.954,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-060",
+        "week": 60,
+        "label": "PD",
+        "vd": 12.805,
+        "vh": 14.88,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-027": [
+      {
+        "timepoint": "week-000-1",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 51.424,
+        "vh": 11.556
+      },
+      {
+        "timepoint": "week-000-2",
+        "week": 0,
+        "label": "Post-Op",
+        "vd": 47.572,
+        "vh": 0.05
+      },
+      {
+        "timepoint": "week-014",
+        "week": 14,
+        "label": "PD",
+        "vd": 14.73,
+        "vh": 12.658,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-028": [
+      {
+        "timepoint": "week-000-1",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 22.658,
+        "vh": 13.352
+      },
+      {
+        "timepoint": "week-015",
+        "week": 15,
+        "label": "PD",
+        "vd": 38.195,
+        "vh": 1.41
+      },
+      {
+        "timepoint": "week-030",
+        "week": 30,
+        "label": "PD",
+        "vd": 64.531,
+        "vh": 13.281,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-038",
+        "week": 38,
+        "label": "PD",
+        "vd": 21.911,
+        "vh": 23.315,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-029": [
+      {
+        "timepoint": "week-000-1",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 17.756,
+        "vh": 5.111
+      },
+      {
+        "timepoint": "week-000-2",
+        "week": 0,
+        "label": "Post-Op",
+        "vd": 64.475,
+        "vh": 0.052
+      },
+      {
+        "timepoint": "week-223",
+        "week": 223,
+        "label": "PD",
+        "vd": 0.36,
+        "vh": 1.507,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-030": [
+      {
+        "timepoint": "week-000",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 7.749,
+        "vh": 18.996
+      },
+      {
+        "timepoint": "week-041",
+        "week": 41,
+        "label": "PD",
+        "vd": 0.47,
+        "vh": 0.047
+      },
+      {
+        "timepoint": "week-052",
+        "week": 52,
+        "label": "PD",
+        "vd": 0.069,
+        "vh": 1.547,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-085",
+        "week": 85,
+        "label": "PD",
+        "vd": 10.762,
+        "vh": 22.471,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-031": [
+      {
+        "timepoint": "week-000",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 8.366,
+        "vh": 10.838
+      },
+      {
+        "timepoint": "week-002",
+        "week": 2,
+        "label": "Post-Op",
+        "vd": 13.724,
+        "vh": 0.552
+      },
+      {
+        "timepoint": "week-015",
+        "week": 15,
+        "label": "SD",
+        "vd": 0.882,
+        "vh": 1.43,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 0
+      },
+      {
+        "timepoint": "week-018",
+        "week": 18,
+        "label": "Post-Op",
+        "vd": 0.313,
+        "vh": 0.228
+      },
+      {
+        "timepoint": "week-142",
+        "week": 142,
+        "label": "PD",
+        "vd": 1.183,
+        "vh": 0.426,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-148",
+        "week": 148,
+        "label": "Post-Op",
+        "vd": 5.911,
+        "vh": 0.0359999656677246
+      },
+      {
+        "timepoint": "week-151",
+        "week": 151,
+        "label": "PD",
+        "vd": 55.64,
+        "vh": 0.066,
+        "auto_d": 1,
+        "auto_h": 0,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-165",
+        "week": 165,
+        "label": "PD",
+        "vd": 1.426,
+        "vh": 0.257,
+        "auto_d": 1,
+        "auto_h": 0,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-184",
+        "week": 184,
+        "label": "PD",
+        "vd": 9.03,
+        "vh": 18.295,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-190",
+        "week": 190,
+        "label": "PD",
+        "vd": 43.589,
+        "vh": 40.566,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-032": [
+      {
+        "timepoint": "week-000-1",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 6.065,
+        "vh": 4.527
+      },
+      {
+        "timepoint": "week-040",
+        "week": 40,
+        "label": "CR",
+        "vd": 2.578,
+        "vh": 0.578
+      },
+      {
+        "timepoint": "week-044",
+        "week": 44,
+        "label": "PD",
+        "vd": 7.263,
+        "vh": 1.011,
+        "auto_d": 1,
+        "auto_h": 0,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-055",
+        "week": 55,
+        "label": "PD",
+        "vd": 7.107,
+        "vh": 1.653,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-067",
+        "week": 67,
+        "label": "PD",
+        "vd": 3.797,
+        "vh": 0.521,
+        "auto_d": 1,
+        "auto_h": 0,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-069",
+        "week": 69,
+        "label": "Post-Op",
+        "vd": 6.024,
+        "vh": 0.01
+      },
+      {
+        "timepoint": "week-075",
+        "week": 75,
+        "label": "PD",
+        "vd": 19.689,
+        "vh": 0.079,
+        "auto_d": 1,
+        "auto_h": 0,
+        "agree": false,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-033": [
+      {
+        "timepoint": "week-000",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 4.57,
+        "vh": 12.148
+      },
+      {
+        "timepoint": "week-002",
+        "week": 2,
+        "label": "Post-Op",
+        "vd": 49.608,
+        "vh": 0.0768000640869141
+      },
+      {
+        "timepoint": "week-006",
+        "week": 6,
+        "label": "SD",
+        "vd": 17.052,
+        "vh": 3.361,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 0
+      },
+      {
+        "timepoint": "week-031",
+        "week": 31,
+        "label": "PD",
+        "vd": 10.118,
+        "vh": 0.09,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-049",
+        "week": 49,
+        "label": "PD",
+        "vd": 23.582,
+        "vh": 0.635,
+        "auto_d": 1,
+        "auto_h": 0,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-076",
+        "week": 76,
+        "label": "PD",
+        "vd": 20.371,
+        "vh": 0.526,
+        "auto_d": 1,
+        "auto_h": 0,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-084",
+        "week": 84,
+        "label": "PD",
+        "vd": 0.493,
+        "vh": 2.77,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-034": [
+      {
+        "timepoint": "week-000-1",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 32.28,
+        "vh": 33.314
+      },
+      {
+        "timepoint": "week-014",
+        "week": 14,
+        "label": "SD",
+        "vd": 22.666,
+        "vh": 1.24
+      },
+      {
+        "timepoint": "week-028",
+        "week": 28,
+        "label": "PD",
+        "vd": 15.124,
+        "vh": 0.039,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-040",
+        "week": 40,
+        "label": "PD",
+        "vd": 9.682,
+        "vh": 8.047,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-044",
+        "week": 44,
+        "label": "Post-Op",
+        "vd": 31.989,
+        "vh": 0.383
+      },
+      {
+        "timepoint": "week-058",
+        "week": 58,
+        "label": "PD",
+        "vd": 29.413,
+        "vh": 0.164,
+        "auto_d": 1,
+        "auto_h": 0,
+        "agree": false,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-035": [
+      {
+        "timepoint": "week-008",
+        "week": 8,
+        "label": "SD",
+        "vd": 21.043,
+        "vh": 13.032
+      },
+      {
+        "timepoint": "week-019",
+        "week": 19,
+        "label": "SD",
+        "vd": 12.959,
+        "vh": 12.354,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 0
+      },
+      {
+        "timepoint": "week-024",
+        "week": 24,
+        "label": "PD",
+        "vd": 15.571,
+        "vh": 13.572,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-036",
+        "week": 36,
+        "label": "PD",
+        "vd": 29.118,
+        "vh": 38.376,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-050",
+        "week": 50,
+        "label": "PD",
+        "vd": 58.293,
+        "vh": 39.948,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-037": [
+      {
+        "timepoint": "week-000-1",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 0.142,
+        "vh": 5.49
+      },
+      {
+        "timepoint": "week-000-2",
+        "week": 0,
+        "label": "Post-Op",
+        "vd": 9.421,
+        "vh": 1.626
+      },
+      {
+        "timepoint": "week-002",
+        "week": 2,
+        "label": "SD",
+        "vd": 8.837,
+        "vh": 9.23,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 0
+      },
+      {
+        "timepoint": "week-015",
+        "week": 15,
+        "label": "SD",
+        "vd": 2.027,
+        "vh": 3.976,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 0
+      },
+      {
+        "timepoint": "week-025",
+        "week": 25,
+        "label": "SD",
+        "vd": 0.642,
+        "vh": 0.19,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 0
+      },
+      {
+        "timepoint": "week-029",
+        "week": 29,
+        "label": "PD",
+        "vd": 0.624,
+        "vh": 1.10899900847673,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-037",
+        "week": 37,
+        "label": "PD",
+        "vd": 1.317,
+        "vh": 0.567,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-039": [
+      {
+        "timepoint": "week-000-1",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 14.236,
+        "vh": 30.408
+      },
+      {
+        "timepoint": "week-017",
+        "week": 17,
+        "label": "SD",
+        "vd": 3.648,
+        "vh": 0.0900000357627869
+      },
+      {
+        "timepoint": "week-044",
+        "week": 44,
+        "label": "PD",
+        "vd": 3.596,
+        "vh": 24.522,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-040": [
+      {
+        "timepoint": "week-000",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 7.968,
+        "vh": 0.6
+      },
+      {
+        "timepoint": "week-015",
+        "week": 15,
+        "label": "SD",
+        "vd": 26.752,
+        "vh": 3.914
+      },
+      {
+        "timepoint": "week-028",
+        "week": 28,
+        "label": "PD",
+        "vd": 18.136,
+        "vh": 26.292,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-041": [
+      {
+        "timepoint": "week-000",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 25.872,
+        "vh": 61.021
+      },
+      {
+        "timepoint": "week-020",
+        "week": 20,
+        "label": "SD",
+        "vd": 2.345,
+        "vh": 6.884
+      },
+      {
+        "timepoint": "week-038",
+        "week": 38,
+        "label": "PD",
+        "vd": 17.44,
+        "vh": 0.5,
+        "auto_d": 1,
+        "auto_h": 0,
+        "agree": false,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-042": [
+      {
+        "timepoint": "week-000-1",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 3.131,
+        "vh": 8.069
+      },
+      {
+        "timepoint": "week-004",
+        "week": 4,
+        "label": "SD",
+        "vd": 0.406,
+        "vh": 0.192
+      },
+      {
+        "timepoint": "week-055",
+        "week": 55,
+        "label": "PD",
+        "vd": 1.519,
+        "vh": 0.903,
+        "auto_d": 1,
+        "auto_h": 0,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-060",
+        "week": 60,
+        "label": "PD",
+        "vd": 1.389,
+        "vh": 1.3,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-061-1",
+        "week": 61,
+        "label": "PD",
+        "vd": 3.332,
+        "vh": 5.38199871683121,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-061-2",
+        "week": 61,
+        "label": "Post-Op",
+        "vd": 26.394,
+        "vh": 0.379
+      },
+      {
+        "timepoint": "week-078",
+        "week": 78,
+        "label": "PD",
+        "vd": 18.689,
+        "vh": 10.653,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-081",
+        "week": 81,
+        "label": "PD",
+        "vd": 31.541,
+        "vh": 38.333,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-082",
+        "week": 82,
+        "label": "Post-Op",
+        "vd": 26.305,
+        "vh": 27.141
+      }
+    ],
+    "Patient-043": [
+      {
+        "timepoint": "week-000",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 0.706,
+        "vh": 0.162
+      },
+      {
+        "timepoint": "week-084",
+        "week": 84,
+        "label": "PD",
+        "vd": 0.087,
+        "vh": 0.342
+      },
+      {
+        "timepoint": "week-098",
+        "week": 98,
+        "label": "PD",
+        "vd": 3.417,
+        "vh": 0.67,
+        "auto_d": 1,
+        "auto_h": 0,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-106",
+        "week": 106,
+        "label": "PD",
+        "vd": 6.867,
+        "vh": 2.196,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-116",
+        "week": 116,
+        "label": "PD",
+        "vd": 22.759,
+        "vh": 11.245,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-045": [
+      {
+        "timepoint": "week-000-1",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 1.542,
+        "vh": 9.208
+      },
+      {
+        "timepoint": "week-017",
+        "week": 17,
+        "label": "SD",
+        "vd": 9.374,
+        "vh": 2.318
+      },
+      {
+        "timepoint": "week-028",
+        "week": 28,
+        "label": "PD",
+        "vd": 12.008,
+        "vh": 1.669,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-046": [
+      {
+        "timepoint": "week-000",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 0.797,
+        "vh": 3.7649925944209097
+      },
+      {
+        "timepoint": "week-001",
+        "week": 1,
+        "label": "Post-Op",
+        "vd": 5.047,
+        "vh": 0.648
+      },
+      {
+        "timepoint": "week-016",
+        "week": 16,
+        "label": "SD",
+        "vd": 0.258,
+        "vh": 0.9,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 0
+      },
+      {
+        "timepoint": "week-064",
+        "week": 64,
+        "label": "PD",
+        "vd": 3.524,
+        "vh": 19.306,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-048": [
+      {
+        "timepoint": "week-000-1",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 7.189,
+        "vh": 25.904
+      },
+      {
+        "timepoint": "week-000-2",
+        "week": 0,
+        "label": "Post-Op",
+        "vd": 25.128,
+        "vh": 0.012999995350837701
+      },
+      {
+        "timepoint": "week-013",
+        "week": 13,
+        "label": "SD",
+        "vd": 12.962,
+        "vh": 0.215999459266663,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 0
+      },
+      {
+        "timepoint": "week-023",
+        "week": 23,
+        "label": "CR",
+        "vd": 11.892,
+        "vh": 0.354,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 0
+      },
+      {
+        "timepoint": "week-045",
+        "week": 45,
+        "label": "PD",
+        "vd": 10.484,
+        "vh": 2.339,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-049",
+        "week": 49,
+        "label": "PD",
+        "vd": 9.405,
+        "vh": 19.593,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-049": [
+      {
+        "timepoint": "week-000",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 18.075,
+        "vh": 3.579
+      },
+      {
+        "timepoint": "week-019",
+        "week": 19,
+        "label": "SD",
+        "vd": 7.792,
+        "vh": 13.008
+      },
+      {
+        "timepoint": "week-029",
+        "week": 29,
+        "label": "PD",
+        "vd": 9.971,
+        "vh": 10.2299463415146,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-046",
+        "week": 46,
+        "label": "PD",
+        "vd": 18.493,
+        "vh": 36.202,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-050": [
+      {
+        "timepoint": "week-000",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 14.72,
+        "vh": 5.874
+      },
+      {
+        "timepoint": "week-048",
+        "week": 48,
+        "label": "PD",
+        "vd": 2.461,
+        "vh": 21.466
+      },
+      {
+        "timepoint": "week-051",
+        "week": 51,
+        "label": "Post-Op",
+        "vd": 23.956,
+        "vh": 0.861
+      },
+      {
+        "timepoint": "week-061",
+        "week": 61,
+        "label": "PD",
+        "vd": 41.668,
+        "vh": 49.673,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-051": [
+      {
+        "timepoint": "week-000-1",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 14.859,
+        "vh": 41.328
+      },
+      {
+        "timepoint": "week-000-2",
+        "week": 0,
+        "label": "Post-Op",
+        "vd": 60.915,
+        "vh": 0.099
+      },
+      {
+        "timepoint": "week-012",
+        "week": 12,
+        "label": "SD",
+        "vd": 3.978,
+        "vh": 0.07560001802444459,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 0
+      },
+      {
+        "timepoint": "week-023",
+        "week": 23,
+        "label": "PD",
+        "vd": 1.291,
+        "vh": 11.236,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-036",
+        "week": 36,
+        "label": "PD",
+        "vd": 1.945,
+        "vh": 1.659,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-050",
+        "week": 50,
+        "label": "PD",
+        "vd": 1.945,
+        "vh": 0.645,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-064",
+        "week": 64,
+        "label": "PD",
+        "vd": 1.694,
+        "vh": 0.218,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-077",
+        "week": 77,
+        "label": "PD",
+        "vd": 2.491,
+        "vh": 1.088,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-089",
+        "week": 89,
+        "label": "PD",
+        "vd": 9.633,
+        "vh": 18.893,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-103",
+        "week": 103,
+        "label": "PD",
+        "vd": 25.887,
+        "vh": 14.892,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-052": [
+      {
+        "timepoint": "week-000",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 8.467,
+        "vh": 17.365
+      },
+      {
+        "timepoint": "week-002",
+        "week": 2,
+        "label": "Post-Op",
+        "vd": 9.921,
+        "vh": 1.61
+      },
+      {
+        "timepoint": "week-089",
+        "week": 89,
+        "label": "PD",
+        "vd": 1.205,
+        "vh": 2.22,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-115",
+        "week": 115,
+        "label": "PD",
+        "vd": 1.129,
+        "vh": 1.205,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-119",
+        "week": 119,
+        "label": "Post-Op",
+        "vd": 1.796,
+        "vh": 0.027
+      },
+      {
+        "timepoint": "week-148",
+        "week": 148,
+        "label": "PD",
+        "vd": 0.843,
+        "vh": 1.49,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-168",
+        "week": 168,
+        "label": "PD",
+        "vd": 0.373,
+        "vh": 6.25,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-054": [
+      {
+        "timepoint": "week-002",
+        "week": 2,
+        "label": "Post-Op",
+        "vd": 17.371,
+        "vh": 0.212
+      },
+      {
+        "timepoint": "week-014",
+        "week": 14,
+        "label": "SD",
+        "vd": 0.248,
+        "vh": 0.75,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 0
+      },
+      {
+        "timepoint": "week-026",
+        "week": 26,
+        "label": "PD",
+        "vd": 0.078,
+        "vh": 0.851,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-043",
+        "week": 43,
+        "label": "PD",
+        "vd": 0.633,
+        "vh": 0.149,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-053",
+        "week": 53,
+        "label": "PD",
+        "vd": 5.372,
+        "vh": 2.415,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-066",
+        "week": 66,
+        "label": "PR",
+        "vd": 3.354,
+        "vh": 0.613,
+        "auto_d": 1,
+        "auto_h": 0,
+        "agree": false,
+        "expert_pd": 0
+      },
+      {
+        "timepoint": "week-077",
+        "week": 77,
+        "label": "PD",
+        "vd": 8.351,
+        "vh": 10.776,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-055": [
+      {
+        "timepoint": "week-000-1",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 27.616,
+        "vh": 19.224
+      },
+      {
+        "timepoint": "week-017",
+        "week": 17,
+        "label": "SD",
+        "vd": 0.024,
+        "vh": 0.0659998977184296
+      },
+      {
+        "timepoint": "week-084",
+        "week": 84,
+        "label": "PD",
+        "vd": 0.521,
+        "vh": 5.198,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-099",
+        "week": 99,
+        "label": "PD",
+        "vd": 4.957,
+        "vh": 8.304,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-118",
+        "week": 118,
+        "label": "PD",
+        "vd": 44.705,
+        "vh": 42.152,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-058": [
+      {
+        "timepoint": "week-002",
+        "week": 2,
+        "label": "Post-Op",
+        "vd": 1.158,
+        "vh": 0.199
+      },
+      {
+        "timepoint": "week-015",
+        "week": 15,
+        "label": "PD",
+        "vd": 0.563,
+        "vh": 3.624,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-027",
+        "week": 27,
+        "label": "PR",
+        "vd": 1.56,
+        "vh": 1.639,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 0
+      },
+      {
+        "timepoint": "week-036",
+        "week": 36,
+        "label": "PR",
+        "vd": 4.061,
+        "vh": 1.236,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 0
+      }
+    ],
+    "Patient-059": [
+      {
+        "timepoint": "week-000",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 0.393,
+        "vh": 4.705
+      },
+      {
+        "timepoint": "week-001",
+        "week": 1,
+        "label": "Post-Op",
+        "vd": 1.623,
+        "vh": 0.805
+      },
+      {
+        "timepoint": "week-014",
+        "week": 14,
+        "label": "PD",
+        "vd": 2.577,
+        "vh": 2.9029847731590297,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-024",
+        "week": 24,
+        "label": "PD",
+        "vd": 2.557,
+        "vh": 8.421,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-040",
+        "week": 40,
+        "label": "PD",
+        "vd": 0.587,
+        "vh": 5.877,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-055",
+        "week": 55,
+        "label": "PR",
+        "vd": 0.85,
+        "vh": 1.661,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 0
+      },
+      {
+        "timepoint": "week-084",
+        "week": 84,
+        "label": "PD",
+        "vd": 0.197,
+        "vh": 1.136,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-100",
+        "week": 100,
+        "label": "PR",
+        "vd": 0.067,
+        "vh": 0.095,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 0
+      },
+      {
+        "timepoint": "week-116",
+        "week": 116,
+        "label": "PR",
+        "vd": 1.236,
+        "vh": 0.115,
+        "auto_d": 1,
+        "auto_h": 0,
+        "agree": false,
+        "expert_pd": 0
+      },
+      {
+        "timepoint": "week-136",
+        "week": 136,
+        "label": "PD",
+        "vd": 0.105,
+        "vh": 0.491,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-060": [
+      {
+        "timepoint": "week-000",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 14.168,
+        "vh": 14.121
+      },
+      {
+        "timepoint": "week-001",
+        "week": 1,
+        "label": "Post-Op",
+        "vd": 18.22,
+        "vh": 0.0240000128746033
+      },
+      {
+        "timepoint": "week-065",
+        "week": 65,
+        "label": "PD",
+        "vd": 0.428,
+        "vh": 0.491,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-069",
+        "week": 69,
+        "label": "Pre-Op",
+        "vd": 5.585,
+        "vh": 1.22
+      },
+      {
+        "timepoint": "week-088",
+        "week": 88,
+        "label": "PD",
+        "vd": 0.255,
+        "vh": 0.912,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-061": [
+      {
+        "timepoint": "week-000-1",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 6.392,
+        "vh": 13.124
+      },
+      {
+        "timepoint": "week-022",
+        "week": 22,
+        "label": "PD",
+        "vd": 1.055,
+        "vh": 0.174
+      },
+      {
+        "timepoint": "week-027",
+        "week": 27,
+        "label": "PD",
+        "vd": 0.126,
+        "vh": 0.12,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-034",
+        "week": 34,
+        "label": "PD",
+        "vd": 0.16,
+        "vh": 0.221,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-054",
+        "week": 54,
+        "label": "PD",
+        "vd": 3.12,
+        "vh": 6.072,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-062": [
+      {
+        "timepoint": "week-000-1",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 32.717,
+        "vh": 7.032
+      },
+      {
+        "timepoint": "week-000-2",
+        "week": 0,
+        "label": "Post-Op",
+        "vd": 73.661,
+        "vh": 0.234
+      },
+      {
+        "timepoint": "week-064",
+        "week": 64,
+        "label": "PD",
+        "vd": 14.394,
+        "vh": 4.321,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-063": [
+      {
+        "timepoint": "week-130",
+        "week": 130,
+        "label": "PD",
+        "vd": 1.311,
+        "vh": 6.031
+      },
+      {
+        "timepoint": "week-168",
+        "week": 168,
+        "label": "PD",
+        "vd": 2.877,
+        "vh": 16.896,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-064": [
+      {
+        "timepoint": "week-000",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 28.231,
+        "vh": 0.727
+      },
+      {
+        "timepoint": "week-002",
+        "week": 2,
+        "label": "Post-Op",
+        "vd": 27.253,
+        "vh": 0.756
+      },
+      {
+        "timepoint": "week-033",
+        "week": 33,
+        "label": "PD",
+        "vd": 22.974,
+        "vh": 0.773,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-062",
+        "week": 62,
+        "label": "PD",
+        "vd": 13.4,
+        "vh": 0.666,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-065": [
+      {
+        "timepoint": "week-000-2",
+        "week": 0,
+        "label": "Post-Op",
+        "vd": 12.162,
+        "vh": 0.282
+      },
+      {
+        "timepoint": "week-014",
+        "week": 14,
+        "label": "SD",
+        "vd": 1.276,
+        "vh": 0.44,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 0
+      },
+      {
+        "timepoint": "week-021",
+        "week": 21,
+        "label": "PD",
+        "vd": 0.896,
+        "vh": 0.23,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-025",
+        "week": 25,
+        "label": "Post-Op",
+        "vd": 7.795,
+        "vh": 0.438
+      },
+      {
+        "timepoint": "week-079",
+        "week": 79,
+        "label": "PD",
+        "vd": 22.253,
+        "vh": 61.869,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-102",
+        "week": 102,
+        "label": "PD",
+        "vd": 31.346,
+        "vh": 76.866,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-066": [
+      {
+        "timepoint": "week-000",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 8.802,
+        "vh": 49.515
+      },
+      {
+        "timepoint": "week-046",
+        "week": 46,
+        "label": "PD",
+        "vd": 1.797,
+        "vh": 0.223
+      },
+      {
+        "timepoint": "week-068",
+        "week": 68,
+        "label": "PD",
+        "vd": 3.326,
+        "vh": 1.175,
+        "auto_d": 1,
+        "auto_h": 0,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-084",
+        "week": 84,
+        "label": "PD",
+        "vd": 3.537,
+        "vh": 29.438,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-101",
+        "week": 101,
+        "label": "PD",
+        "vd": 3.479,
+        "vh": 0.825,
+        "auto_d": 1,
+        "auto_h": 0,
+        "agree": false,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-067": [
+      {
+        "timepoint": "week-013",
+        "week": 13,
+        "label": "PD",
+        "vd": 1.147,
+        "vh": 1.807
+      },
+      {
+        "timepoint": "week-019-2",
+        "week": 19,
+        "label": "Post-Op",
+        "vd": 12.82,
+        "vh": 2.086
+      },
+      {
+        "timepoint": "week-053",
+        "week": 53,
+        "label": "PD",
+        "vd": 5.484,
+        "vh": 0.325999378204346,
+        "auto_d": 1,
+        "auto_h": 0,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-068",
+        "week": 68,
+        "label": "SD",
+        "vd": 40.702,
+        "vh": 2.832,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 0
+      },
+      {
+        "timepoint": "week-073",
+        "week": 73,
+        "label": "SD",
+        "vd": 32.359,
+        "vh": 2.854,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 0
+      },
+      {
+        "timepoint": "week-077",
+        "week": 77,
+        "label": "SD",
+        "vd": 23.325,
+        "vh": 0.704,
+        "auto_d": 1,
+        "auto_h": 0,
+        "agree": false,
+        "expert_pd": 0
+      },
+      {
+        "timepoint": "week-079",
+        "week": 79,
+        "label": "SD",
+        "vd": 16.045,
+        "vh": 0.29280012798309296,
+        "auto_d": 1,
+        "auto_h": 0,
+        "agree": false,
+        "expert_pd": 0
+      },
+      {
+        "timepoint": "week-152",
+        "week": 152,
+        "label": "PD",
+        "vd": 2.696,
+        "vh": 13.065,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-156",
+        "week": 156,
+        "label": "PD",
+        "vd": 3.189,
+        "vh": 24.03,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-167",
+        "week": 167,
+        "label": "PD",
+        "vd": 16.53,
+        "vh": 55.603,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-068": [
+      {
+        "timepoint": "week-000-1",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 3.517,
+        "vh": 0.625
+      },
+      {
+        "timepoint": "week-004",
+        "week": 4,
+        "label": "PD",
+        "vd": 29.472,
+        "vh": 0.727
+      },
+      {
+        "timepoint": "week-010",
+        "week": 10,
+        "label": "PR",
+        "vd": 15.418,
+        "vh": 0.183,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 0
+      },
+      {
+        "timepoint": "week-035",
+        "week": 35,
+        "label": "PD",
+        "vd": 0.599,
+        "vh": 7.11,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-047",
+        "week": 47,
+        "label": "PD",
+        "vd": 28.117,
+        "vh": 106.329,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-071": [
+      {
+        "timepoint": "week-024",
+        "week": 24,
+        "label": "PD",
+        "vd": 6.863,
+        "vh": 0.295
+      },
+      {
+        "timepoint": "week-027",
+        "week": 27,
+        "label": "PD",
+        "vd": 6.476,
+        "vh": 1.513,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-052",
+        "week": 52,
+        "label": "PD",
+        "vd": 5.049,
+        "vh": 11.549,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-058",
+        "week": 58,
+        "label": "PD",
+        "vd": 24.789,
+        "vh": 15.925,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-062",
+        "week": 62,
+        "label": "PD",
+        "vd": 36.798,
+        "vh": 32.833,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-072": [
+      {
+        "timepoint": "week-000-1",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 14.248,
+        "vh": 38.121
+      },
+      {
+        "timepoint": "week-000-2",
+        "week": 0,
+        "label": "Post-Op",
+        "vd": 42.928,
+        "vh": 2.767
+      },
+      {
+        "timepoint": "week-013",
+        "week": 13,
+        "label": "SD",
+        "vd": 16.682,
+        "vh": 7.554,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 0
+      },
+      {
+        "timepoint": "week-021",
+        "week": 21,
+        "label": "PD",
+        "vd": 17.114,
+        "vh": 13.858,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-029",
+        "week": 29,
+        "label": "PD",
+        "vd": 9.401,
+        "vh": 13.9489584287405,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-037",
+        "week": 37,
+        "label": "PR",
+        "vd": 4.156,
+        "vh": 10.236,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 0
+      },
+      {
+        "timepoint": "week-046",
+        "week": 46,
+        "label": "PD",
+        "vd": 6.317,
+        "vh": 5.088,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-055",
+        "week": 55,
+        "label": "PD",
+        "vd": 6.996,
+        "vh": 2.716,
+        "auto_d": 1,
+        "auto_h": 0,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-064",
+        "week": 64,
+        "label": "PD",
+        "vd": 13.152,
+        "vh": 1.514,
+        "auto_d": 1,
+        "auto_h": 0,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-073",
+        "week": 73,
+        "label": "PD",
+        "vd": 8.428,
+        "vh": 2.267,
+        "auto_d": 1,
+        "auto_h": 0,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-078",
+        "week": 78,
+        "label": "PD",
+        "vd": 3.977,
+        "vh": 3.426,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-090",
+        "week": 90,
+        "label": "PD",
+        "vd": 7.484,
+        "vh": 2.335,
+        "auto_d": 1,
+        "auto_h": 0,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-105",
+        "week": 105,
+        "label": "PD",
+        "vd": 12.062,
+        "vh": 1.93599826908112,
+        "auto_d": 1,
+        "auto_h": 0,
+        "agree": false,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-073": [
+      {
+        "timepoint": "week-000",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 29.401,
+        "vh": 35.675
+      },
+      {
+        "timepoint": "week-015",
+        "week": 15,
+        "label": "SD",
+        "vd": 40.72,
+        "vh": 0.5500026881694791
+      },
+      {
+        "timepoint": "week-100",
+        "week": 100,
+        "label": "PD",
+        "vd": 56.458,
+        "vh": 0.232,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-216",
+        "week": 216,
+        "label": "PD",
+        "vd": 0.175,
+        "vh": 6.069,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-228",
+        "week": 228,
+        "label": "PD",
+        "vd": 0.826,
+        "vh": 7.685,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-242",
+        "week": 242,
+        "label": "PD",
+        "vd": 28.261,
+        "vh": 13.898,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-074": [
+      {
+        "timepoint": "week-000-2",
+        "week": 0,
+        "label": "Post-Op",
+        "vd": 70.787,
+        "vh": 0.522
+      },
+      {
+        "timepoint": "week-039",
+        "week": 39,
+        "label": "PD",
+        "vd": 0.772,
+        "vh": 9.726,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-075": [
+      {
+        "timepoint": "week-000",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 0.353,
+        "vh": 3.49
+      },
+      {
+        "timepoint": "week-002",
+        "week": 2,
+        "label": "Post-Op",
+        "vd": 4.254,
+        "vh": 0.126
+      },
+      {
+        "timepoint": "week-020",
+        "week": 20,
+        "label": "SD",
+        "vd": 2.282,
+        "vh": 0.546,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 0
+      },
+      {
+        "timepoint": "week-044",
+        "week": 44,
+        "label": "PR",
+        "vd": 4.006,
+        "vh": 0.415,
+        "auto_d": 1,
+        "auto_h": 0,
+        "agree": false,
+        "expert_pd": 0
+      }
+    ],
+    "Patient-077": [
+      {
+        "timepoint": "week-000",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 2.908,
+        "vh": 21.657
+      },
+      {
+        "timepoint": "week-001",
+        "week": 1,
+        "label": "Post-Op",
+        "vd": 30.135,
+        "vh": 0.243
+      },
+      {
+        "timepoint": "week-026",
+        "week": 26,
+        "label": "PD",
+        "vd": 8.902,
+        "vh": 2.171,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-048",
+        "week": 48,
+        "label": "PD",
+        "vd": 0.97,
+        "vh": 0.35,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-062",
+        "week": 62,
+        "label": "PD",
+        "vd": 0.192,
+        "vh": 4.82,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-070",
+        "week": 70,
+        "label": "PD",
+        "vd": 2.358,
+        "vh": 11.11,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-083",
+        "week": 83,
+        "label": "PD",
+        "vd": 28.777,
+        "vh": 44.392,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-078": [
+      {
+        "timepoint": "week-000",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 16.433,
+        "vh": 26.625
+      },
+      {
+        "timepoint": "week-001",
+        "week": 1,
+        "label": "Post-Op",
+        "vd": 15.719,
+        "vh": 0.366
+      },
+      {
+        "timepoint": "week-005",
+        "week": 5,
+        "label": "SD",
+        "vd": 2.038,
+        "vh": 2.967,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 0
+      },
+      {
+        "timepoint": "week-019",
+        "week": 19,
+        "label": "SD",
+        "vd": 1.447,
+        "vh": 4.331,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 0
+      },
+      {
+        "timepoint": "week-029",
+        "week": 29,
+        "label": "PD",
+        "vd": 2.316,
+        "vh": 7.422,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-037",
+        "week": 37,
+        "label": "PD",
+        "vd": 2.941,
+        "vh": 9.522,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-039",
+        "week": 39,
+        "label": "PD",
+        "vd": 3.006,
+        "vh": 4.127,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-041",
+        "week": 41,
+        "label": "PD",
+        "vd": 2.741,
+        "vh": 5.215,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-045",
+        "week": 45,
+        "label": "PD",
+        "vd": 2.58,
+        "vh": 2.238,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-056",
+        "week": 56,
+        "label": "PD",
+        "vd": 2.032,
+        "vh": 3.42,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-062",
+        "week": 62,
+        "label": "PD",
+        "vd": 2.568,
+        "vh": 4.211,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-076",
+        "week": 76,
+        "label": "PD",
+        "vd": 2.605,
+        "vh": 3.82,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-088",
+        "week": 88,
+        "label": "PD",
+        "vd": 2.528,
+        "vh": 3.117,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-106",
+        "week": 106,
+        "label": "PR",
+        "vd": 10.25,
+        "vh": 1.553,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 0
+      },
+      {
+        "timepoint": "week-113",
+        "week": 113,
+        "label": "PD",
+        "vd": 2.172,
+        "vh": 3.001,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-116",
+        "week": 116,
+        "label": "PD",
+        "vd": 3.248,
+        "vh": 5.292,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-119",
+        "week": 119,
+        "label": "PD",
+        "vd": 3.165,
+        "vh": 9.355,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-080": [
+      {
+        "timepoint": "week-000",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 10.791,
+        "vh": 23.045
+      },
+      {
+        "timepoint": "week-001",
+        "week": 1,
+        "label": "Post-Op",
+        "vd": 26.431,
+        "vh": 0.096
+      },
+      {
+        "timepoint": "week-018",
+        "week": 18,
+        "label": "SD",
+        "vd": 0.816,
+        "vh": 0.285,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 0
+      }
+    ],
+    "Patient-081": [
+      {
+        "timepoint": "week-000-1",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 24.082,
+        "vh": 27.241
+      },
+      {
+        "timepoint": "week-000-2",
+        "week": 0,
+        "label": "Post-Op",
+        "vd": 47.011,
+        "vh": 0.145
+      },
+      {
+        "timepoint": "week-006",
+        "week": 6,
+        "label": "PD",
+        "vd": 26.645,
+        "vh": 23.034,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-084": [
+      {
+        "timepoint": "week-000-2",
+        "week": 0,
+        "label": "Post-Op",
+        "vd": 18.07,
+        "vh": 0.186
+      },
+      {
+        "timepoint": "week-012",
+        "week": 12,
+        "label": "SD",
+        "vd": 14.339,
+        "vh": 18.058,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 0
+      }
+    ],
+    "Patient-085": [
+      {
+        "timepoint": "week-000-2",
+        "week": 0,
+        "label": "Post-Op",
+        "vd": 13.847,
+        "vh": 0.356
+      },
+      {
+        "timepoint": "week-001",
+        "week": 1,
+        "label": "Post-Op",
+        "vd": 3.689,
+        "vh": 1.156
+      },
+      {
+        "timepoint": "week-018",
+        "week": 18,
+        "label": "PD",
+        "vd": 1.055,
+        "vh": 4.542,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-042",
+        "week": 42,
+        "label": "PD",
+        "vd": 22.961,
+        "vh": 0.024,
+        "auto_d": 1,
+        "auto_h": 0,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-050",
+        "week": 50,
+        "label": "PD",
+        "vd": 46.898,
+        "vh": 7.376,
+        "auto_d": 1,
+        "auto_h": 1,
+        "agree": true,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-086": [
+      {
+        "timepoint": "week-000",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 21.505,
+        "vh": 50.029
+      },
+      {
+        "timepoint": "week-001",
+        "week": 1,
+        "label": "Post-Op",
+        "vd": 40.455,
+        "vh": 15.749
+      },
+      {
+        "timepoint": "week-173-1",
+        "week": 173,
+        "label": "PD",
+        "vd": 49.957,
+        "vh": 33.204,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-173-2",
+        "week": 173,
+        "label": "Post-Op",
+        "vd": 95.188,
+        "vh": 0.628
+      },
+      {
+        "timepoint": "week-181",
+        "week": 181,
+        "label": "PD",
+        "vd": 12.579,
+        "vh": 35.327,
+        "auto_d": 0,
+        "auto_h": 1,
+        "agree": false,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-087": [
+      {
+        "timepoint": "week-000-1",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 5.535,
+        "vh": 12.12
+      },
+      {
+        "timepoint": "week-000-2",
+        "week": 0,
+        "label": "Post-Op",
+        "vd": 2.795,
+        "vh": 0.636
+      },
+      {
+        "timepoint": "week-024",
+        "week": 24,
+        "label": "PD",
+        "vd": 0.243,
+        "vh": 0.054,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-089": [
+      {
+        "timepoint": "week-000-1",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 14.814,
+        "vh": 11.713
+      },
+      {
+        "timepoint": "week-045",
+        "week": 45,
+        "label": "PD",
+        "vd": 7.35,
+        "vh": 10.285
+      },
+      {
+        "timepoint": "week-046",
+        "week": 46,
+        "label": "Post-Op/PD",
+        "vd": 4.146,
+        "vh": 1.02
+      },
+      {
+        "timepoint": "week-056",
+        "week": 56,
+        "label": "PD",
+        "vd": 1.895,
+        "vh": 1.58999383985996,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-064",
+        "week": 64,
+        "label": "PD",
+        "vd": 20.981,
+        "vh": 2.088,
+        "auto_d": 1,
+        "auto_h": 0,
+        "agree": false,
+        "expert_pd": 1
+      }
+    ],
+    "Patient-091": [
+      {
+        "timepoint": "week-000",
+        "week": 0,
+        "label": "Pre-Op",
+        "vd": 33.037,
+        "vh": 0.814
+      },
+      {
+        "timepoint": "week-001",
+        "week": 1,
+        "label": "Post-Op",
+        "vd": 8.494,
+        "vh": 0.085
+      },
+      {
+        "timepoint": "week-014",
+        "week": 14,
+        "label": "PD",
+        "vd": 1.009,
+        "vh": 0.0575999908447266,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-026",
+        "week": 26,
+        "label": "PD",
+        "vd": 0.411,
+        "vh": 0.085,
+        "auto_d": 0,
+        "auto_h": 0,
+        "agree": true,
+        "expert_pd": 1
+      },
+      {
+        "timepoint": "week-043",
+        "week": 43,
+        "label": "PD",
+        "vd": 1.841,
+        "vh": 0.09,
+        "auto_d": 1,
+        "auto_h": 0,
+        "agree": false,
+        "expert_pd": 1
+      }
+    ]
+  },
+  "provenance": {
+    "source": "LUMIERE public derived enhancing-volume tables and expert ratings",
+    "citation": "Suter et al., Scientific Data 9, 768 (2022)",
+    "doi": "10.1038/s41597-022-01881-7",
+    "license": "CC BY 4.0",
+    "note": "Derived retrospective source-precision measurements. Exact source timepoint IDs preserve multiple visits in the same week. Display rounds to 0.01 mL."
+  }
+}

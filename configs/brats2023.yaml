@@ -15,7 +15,7 @@
 
 data:
   layout: brats
-  root: C:/Users/SUBHRAKANT SETHI/Brain-MRI-Predicting-consequential-segmentation-errors/data/brats2023_download/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData
+  root: data/BraTS2023_GLI
   modalities: [t1n, t1c, t2w, t2f]    # BraTS 2023 file suffixes, in channel order
   label_suffix: seg
   enhancing_label: 3                  # BraTS 2023+: ET = 3 (was 4 in BraTS 2021)
